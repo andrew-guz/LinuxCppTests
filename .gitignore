@@ -33,6 +33,7 @@
 
 #build folders
 bin/
+lib/
 CMakeFiles/
 cmake_install.cmake
 CMakeCache.txt
