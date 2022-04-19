@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+#build folders
+bin/
+CMakeFiles/
+cmake_install.cmake
+CMakeCache.txt
+CMakeTest1/Makefile
+JsonTest1/Makefile
+MemorySizeTest/Makefile
+
+#logs
+*.log
