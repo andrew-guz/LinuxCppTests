@@ -11,8 +11,9 @@ set(CMAKE_BUILD_TYPE Debug)
 project(${PROJECT_NAME})
 
 #where to search headers
-include_directories(./include)
 include_directories(./interfaces)
+include_directories(./include)
+include_directories(./include/core)
 
 #set variable where to put ouput file
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -25,7 +26,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #set list of files by wildcard into global variable
-file(GLOB SRC_FILES "./source/*.cpp")
+file(GLOB_RECURSE SRC_FILES "./source/*.cpp")
 
 #create shared library from source
 add_library(${PROJECT_NAME} SHARED ${SRC_FILES})
