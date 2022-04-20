@@ -142,59 +142,86 @@ DataClasses/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/build
 .PHONY : DataClasses/fast
 
-source/Entity.o: source/Entity.cpp.o
+source/core/Entity.o: source/core/Entity.cpp.o
 
-.PHONY : source/Entity.o
-
-# target to build an object file
-source/Entity.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/Entity.cpp.o
-.PHONY : source/Entity.cpp.o
-
-source/Entity.i: source/Entity.cpp.i
-
-.PHONY : source/Entity.i
-
-# target to preprocess a source file
-source/Entity.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/Entity.cpp.i
-.PHONY : source/Entity.cpp.i
-
-source/Entity.s: source/Entity.cpp.s
-
-.PHONY : source/Entity.s
-
-# target to generate assembly for a file
-source/Entity.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/Entity.cpp.s
-.PHONY : source/Entity.cpp.s
-
-source/Variant.o: source/Variant.cpp.o
-
-.PHONY : source/Variant.o
+.PHONY : source/core/Entity.o
 
 # target to build an object file
-source/Variant.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/Variant.cpp.o
-.PHONY : source/Variant.cpp.o
+source/core/Entity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Entity.cpp.o
+.PHONY : source/core/Entity.cpp.o
 
-source/Variant.i: source/Variant.cpp.i
+source/core/Entity.i: source/core/Entity.cpp.i
 
-.PHONY : source/Variant.i
+.PHONY : source/core/Entity.i
 
 # target to preprocess a source file
-source/Variant.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/Variant.cpp.i
-.PHONY : source/Variant.cpp.i
+source/core/Entity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Entity.cpp.i
+.PHONY : source/core/Entity.cpp.i
 
-source/Variant.s: source/Variant.cpp.s
+source/core/Entity.s: source/core/Entity.cpp.s
 
-.PHONY : source/Variant.s
+.PHONY : source/core/Entity.s
 
 # target to generate assembly for a file
-source/Variant.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/Variant.cpp.s
-.PHONY : source/Variant.cpp.s
+source/core/Entity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Entity.cpp.s
+.PHONY : source/core/Entity.cpp.s
+
+source/core/Property.o: source/core/Property.cpp.o
+
+.PHONY : source/core/Property.o
+
+# target to build an object file
+source/core/Property.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Property.cpp.o
+.PHONY : source/core/Property.cpp.o
+
+source/core/Property.i: source/core/Property.cpp.i
+
+.PHONY : source/core/Property.i
+
+# target to preprocess a source file
+source/core/Property.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Property.cpp.i
+.PHONY : source/core/Property.cpp.i
+
+source/core/Property.s: source/core/Property.cpp.s
+
+.PHONY : source/core/Property.s
+
+# target to generate assembly for a file
+source/core/Property.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Property.cpp.s
+.PHONY : source/core/Property.cpp.s
+
+source/core/Variant.o: source/core/Variant.cpp.o
+
+.PHONY : source/core/Variant.o
+
+# target to build an object file
+source/core/Variant.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Variant.cpp.o
+.PHONY : source/core/Variant.cpp.o
+
+source/core/Variant.i: source/core/Variant.cpp.i
+
+.PHONY : source/core/Variant.i
+
+# target to preprocess a source file
+source/core/Variant.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Variant.cpp.i
+.PHONY : source/core/Variant.cpp.i
+
+source/core/Variant.s: source/core/Variant.cpp.s
+
+.PHONY : source/core/Variant.s
+
+# target to generate assembly for a file
+source/core/Variant.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataClasses.dir/build.make CMakeFiles/DataClasses.dir/source/core/Variant.cpp.s
+.PHONY : source/core/Variant.cpp.s
 
 # Help Target
 help:
@@ -205,12 +232,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... DataClasses"
-	@echo "... source/Entity.o"
-	@echo "... source/Entity.i"
-	@echo "... source/Entity.s"
-	@echo "... source/Variant.o"
-	@echo "... source/Variant.i"
-	@echo "... source/Variant.s"
+	@echo "... source/core/Entity.o"
+	@echo "... source/core/Entity.i"
+	@echo "... source/core/Entity.s"
+	@echo "... source/core/Property.o"
+	@echo "... source/core/Property.i"
+	@echo "... source/core/Property.s"
+	@echo "... source/core/Variant.o"
+	@echo "... source/core/Variant.i"
+	@echo "... source/core/Variant.s"
 .PHONY : help
 
 
