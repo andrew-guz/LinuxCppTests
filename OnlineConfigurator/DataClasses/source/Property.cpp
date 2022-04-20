@@ -28,6 +28,12 @@ Property& Property::operator=(const Property& other)
     return *this;
 }
 
+Property& Property::operator=(const Variant& data)
+{
+    _data = data;
+    return *this;
+}
+
 bool Property::operator==(const Property& other) const
 {
     return std::tie(_name, _displayName, _data) == std::tie(other._name, other._displayName, other._data);
@@ -51,9 +57,4 @@ const std::string& Property::displayName() const
 const Variant& Property::data() const
 {
     return _data;
-}
-
-void Property::setData(const Variant& data)
-{
-    _data = data;
 }

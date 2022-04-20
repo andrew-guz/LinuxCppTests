@@ -4,30 +4,42 @@
 #include <variant>
 #include <string>
 
+typedef std::variant<bool, int, float, std::string> VariantType;
+
+template<typename T, typename VARIANT_T>
+struct IsVariantMember;
+
+template<typename T, typename... ALL_T>
+struct IsVariantMember<T, std::variant<ALL_T...>>  : public std::disjunction<std::is_same<T, ALL_T>...> {};
+
 class Variant final
 {
+private:
+
 public:
     Variant() = default;
 
-    Variant(bool value);
-
-    Variant(int value);
-
-    Variant(float value);
-
-    Variant(const std::string& value);
+    template<typename T>
+    Variant(const T& t) :
+        _isEmpty(false),
+        _data(t)
+    {
+        static_assert(IsVariantMember<T, VariantType>::value);
+    }
 
     Variant(const Variant& other);
 
     virtual ~Variant() = default;
 
-    Variant& operator=(bool value);
+    template<typename T>
+    Variant& operator=(const T& t)
+    {
+        static_assert(IsVariantMember<T, VariantType>::value);
 
-    Variant& operator=(int value);
-
-    Variant& operator=(float value);
-
-    Variant& operator=(const std::string& value);
+        _isEmpty = false;
+        _data = t;
+        return *this;
+    }
 
     bool operator==(const Variant& other) const;
 
@@ -45,8 +57,8 @@ public:
     std::string toString() const;
 
 private:
-    bool                                        _isEmpty = true;
-    std::variant<bool, int, float, std::string> _data;
+    bool        _isEmpty = true;
+    VariantType _data;
 };
 
 #endif //_VARIANT_H_

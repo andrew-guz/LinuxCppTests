@@ -16,6 +16,8 @@ public:
 
     Property& operator=(const Property& other);
 
+    Property& operator=(const Variant& data);
+
     bool operator==(const Property& other) const;
 
     bool operator!=(const Property& other) const;
@@ -26,8 +28,6 @@ public:
     const std::string& displayName() const;
 
     const Variant& data() const;
-
-    void setData(const Variant& data);
 
 private:
     std::string _name;
