@@ -26,6 +26,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #set list of files by wildcard into global variable
 file(GLOB SRC_FILES "./source/*.cpp")
+#this will search for *.cpp in source recursively
+#file(GLOB_RECURSE SRC_FILES "./source/*.cpp")
 
 #create executable from source
 add_executable(${PROJECT_NAME} main.cpp ${SRC_FILES})
