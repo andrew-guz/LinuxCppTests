@@ -1,5 +1,6 @@
 #include "Variant.h"
 
+#include <cassert>
 #include <tuple>
 
 Variant::Variant(const Variant& other) :
@@ -20,6 +21,11 @@ bool Variant::operator!=(const Variant& other) const
 bool Variant::isEmpty() const
 {
     return _isEmpty;
+}
+
+int Variant::typeIndex() const
+{
+    return _data.index();
 }
 
 bool Variant::toBool() const

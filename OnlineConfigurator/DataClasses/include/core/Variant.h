@@ -4,7 +4,7 @@
 #include <variant>
 #include <string>
 
-typedef std::variant<bool, int, float, std::string> VariantType;
+typedef std::variant<bool, int, float, std::string> VariantDataType;
 
 template<typename T, typename VARIANT_T>
 struct IsVariantMember;
@@ -24,7 +24,7 @@ public:
         _isEmpty(false),
         _data(t)
     {
-        static_assert(IsVariantMember<T, VariantType>::value);
+        static_assert(IsVariantMember<T, VariantDataType>::value);
     }
 
     Variant(const Variant& other);
@@ -34,7 +34,7 @@ public:
     template<typename T>
     Variant& operator=(const T& t)
     {
-        static_assert(IsVariantMember<T, VariantType>::value);
+        static_assert(IsVariantMember<T, VariantDataType>::value);
 
         _isEmpty = false;
         _data = t;
@@ -48,6 +48,8 @@ public:
 public:
     bool isEmpty() const;
 
+    int typeIndex() const;
+
     bool toBool() const;
 
     int toInt() const;
@@ -57,8 +59,8 @@ public:
     std::string toString() const;
 
 private:
-    bool        _isEmpty = true;
-    VariantType _data;
+    bool            _isEmpty = true;
+    VariantDataType _data;
 };
 
 #endif //_VARIANT_H_

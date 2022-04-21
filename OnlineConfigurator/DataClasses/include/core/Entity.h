@@ -38,6 +38,9 @@ private:
     uuid_t                          _id;
     std::map<std::string, Property> _properties;
     std::map<std::string, IEntity*> _subEntities;
+
+private:
+    friend class EntitySerializer;
 };
 
 #endif //_ENTITY_H_

@@ -5,9 +5,9 @@
 #include <map>
 
 #include "Singleton.h"
-#include "IEntity.h"
+#include "Entity.h"
 
-typedef std::function<IEntity*(const std::string&)> EntityCreationFunction;
+typedef std::function<Entity*(const std::string&)> EntityCreationFunction;
 
 class EntityFactory final : public Singleton<EntityFactory>
 {
@@ -16,7 +16,7 @@ public:
 
     void registercreationFunction(const std::string& type, EntityCreationFunction function);
 
-    IEntity* createEntity(const std::string& type, const std::string& id) const;
+    Entity* createEntity(const std::string& type, const std::string& id) const;
 
 private:
     std::map<std::string, EntityCreationFunction> _creators;

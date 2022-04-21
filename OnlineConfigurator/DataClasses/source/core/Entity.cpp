@@ -1,7 +1,7 @@
+#include "Entity.h"
+
 #include <cassert>
 #include <algorithm>
-
-#include "Entity.h"
 
 Entity::Entity()
 {

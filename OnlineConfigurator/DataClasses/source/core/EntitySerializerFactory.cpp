@@ -1,6 +1,6 @@
-#include <cassert>
-
 #include "EntitySerializerFactory.h"
+
+#include <cassert>
 
 void EntitySerializerFactory::registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer)
 {

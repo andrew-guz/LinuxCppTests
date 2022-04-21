@@ -1,7 +1,7 @@
+#include "Property.h"
+
 #include <cassert>
 #include <tuple>
-
-#include "Property.h"
 
 Property::Property(const std::string& name, const std::string& displayName, const Variant& data) :
     _name(name),

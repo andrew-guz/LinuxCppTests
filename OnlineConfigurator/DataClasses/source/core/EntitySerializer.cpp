@@ -1,17 +1,8 @@
 #include "EntitySerializer.h"
 
-std::string EntitySerializer::toString(const IEntity* entity) const
-{
-    return toJson(entity).dump();
-}
-
-IEntity* EntitySerializer::toEntity(const std::string& str) const
-{
-    auto jsonObject = nlohmann::json::parse(str);
-    auto type = jsonObject["type"].get<std::string>();
-    auto id = jsonObject["type"].get<std::string>();
-    return nullptr;
-}
+#include "VariantSerializer.h"
+#include "EntitySerializerFactory.h"
+#include "EntityFactory.h"
 
 nlohmann::json EntitySerializer::toJson(const IEntity* entity) const
 {
@@ -25,9 +16,44 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity) const
         auto jsonProperty = nlohmann::json::object();
         jsonProperty["name"] = property.name();
         jsonProperty["displayName"] = property.displayName();
-        //jsonProperty["data"] = property.data();
+        jsonProperty["data"] = VariantSerializer::toJson(property.data());
         jsonProperties.push_back(jsonProperty);
     }
     jsonObject["properties"] = jsonProperties;
+    auto jsonSubEntities = nlohmann::json::array();
+    for (const auto& subEntityName : entity->listSubEntityNames())
+    {
+        const auto& subEntity = entity->subEntity(subEntityName);
+        auto jsonSubEntity = nlohmann::json::object();
+        jsonSubEntity["type"] = subEntity->type();
+        jsonSubEntity["name"] = subEntityName;
+        auto serializer = EntitySerializerFactory::instance()->createSerializer(subEntity->type());
+        jsonSubEntity["entity"] = serializer->toJson(subEntity);
+        jsonSubEntities.push_back(jsonSubEntity);
+    }
+    jsonObject["subEntities"] = jsonSubEntities;
     return jsonObject;
+}
+
+IEntity* EntitySerializer::toEntity(const nlohmann::json& jsonObject) const
+{
+    auto type = jsonObject["type"].get<std::string>();
+    auto id = jsonObject["id"].get<std::string>();
+    auto entity = EntityFactory::instance()->createEntity(type, id);
+    for (const auto& jsonProperty : jsonObject["properties"])
+    {
+        auto name = jsonProperty.value<std::string>("name", "");
+        auto displayName = jsonProperty.value<std::string>("displayName", "");
+        auto data = VariantSerializer::fromJson(jsonProperty["data"]);
+        entity->addProperty(name, displayName, data);
+    }
+    for (const auto& jsonSubEntity : jsonObject["subEntities"])
+    {
+        auto type = jsonSubEntity["type"].get<std::string>();
+        auto name = jsonSubEntity["name"].get<std::string>();
+        auto jsonData = jsonSubEntity["data"];
+        auto serializer = EntitySerializerFactory::instance()->createSerializer(type);
+        entity->addSubEntity(name, serializer->toEntity(jsonData));
+    }
+    return entity;
 }
