@@ -34,6 +34,8 @@
 #build folders
 bin/
 lib/
+
+#Make and CMake files
 CMakeFiles/
 cmake_install.cmake
 CMakeCache.txt
@@ -44,4 +46,4 @@ OnlineConfigurator/DataClasses/Makefile
 
 #logs
 *.log
-OnlineConfigurator/DataClasses/Makefile
+
