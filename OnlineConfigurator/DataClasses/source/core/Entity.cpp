@@ -1,4 +1,5 @@
 #include <cassert>
+#include <algorithm>
 
 #include "Entity.h"
 
@@ -39,23 +40,42 @@ const T& search(const std::map<std::string, T>& map, const std::string& name)
     return iter->second;
 }
 
+template<typename T>
+std::vector<std::string> list(const std::map<std::string, T>& map)
+{
+    std::vector<std::string> result;
+    std::transform(map.begin(), map.end(), std::back_inserter(result), [](const std::pair<std::string, T>& pair){
+        return pair.first;
+    });
+    return result;
+}
 
-Property& Entity::operator[](const std::string& name)
+std::vector<std::string> Entity::listPropertyNames() const
+{
+    return list(_properties);
+}
+
+Property& Entity::property(const std::string& name)
 {
     return search(_properties, name);
 }
 
-const Property& Entity::operator[](const std::string& name) const
+const Property& Entity::property(const std::string& name) const
 {
     return search(_properties, name);
 }
 
-IEntity* Entity::getSubEntity(const std::string& name)
+std::vector<std::string> Entity::listSubEntityNames() const
+{
+    return list(_subEntities);
+}
+
+IEntity* Entity::subEntity(const std::string& name)
 {
     return search(_subEntities, name);
 }
 
-const IEntity* Entity::getSubEntity(const std::string& name) const
+const IEntity* Entity::subEntity(const std::string& name) const
 {
     return search(_subEntities, name);
 }

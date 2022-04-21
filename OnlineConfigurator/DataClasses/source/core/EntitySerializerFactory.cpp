@@ -1,8 +1,17 @@
+#include <cassert>
+
 #include "EntitySerializerFactory.h"
 
-#include "EntitySerializer.h"
-
-std::shared_ptr<ISerializer> EntitySerializerFactory::createSerializer()
+void EntitySerializerFactory::registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer)
 {
-    return std::make_shared<EntitySerializer>();
+    auto iter = _serializers.find(type);
+    assert(iter == _serializers.end());
+    _serializers.insert(std::make_pair(type, serializer));
+}
+
+std::shared_ptr<ISerializer> EntitySerializerFactory::createSerializer(const std::string& type)
+{
+    auto iter = _serializers.find(type);
+    assert(iter != _serializers.end());
+    return iter->second;
 }

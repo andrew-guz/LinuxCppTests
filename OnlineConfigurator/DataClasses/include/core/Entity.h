@@ -15,15 +15,19 @@ public:
     virtual ~Entity();
 
 public:
-    virtual const uuid_t& id() const override;
+    virtual const uuid_t& id() const override final;
 
-    virtual Property& operator[](const std::string& name) override;
+    virtual std::vector<std::string> listPropertyNames() const override final;
 
-    virtual const Property& operator[](const std::string& name) const override;
+    virtual Property& property(const std::string& name) override  final;
 
-    virtual IEntity* getSubEntity(const std::string& name) override;
+    virtual const Property& property(const std::string& name) const override final;
 
-    virtual const IEntity* getSubEntity(const std::string& name) const override;
+    virtual std::vector<std::string> listSubEntityNames() const override final;
+
+    virtual IEntity* subEntity(const std::string& name) override final;
+
+    virtual const IEntity* subEntity(const std::string& name) const override final;
 
 protected:
     void addProperty(const std::string& name, const std::string& displayName, const Variant& data = {});
@@ -34,9 +38,6 @@ private:
     uuid_t                          _id;
     std::map<std::string, Property> _properties;
     std::map<std::string, IEntity*> _subEntities;
-
-private:
-    friend class EntitySerializer;
 };
 
 #endif //_ENTITY_H_

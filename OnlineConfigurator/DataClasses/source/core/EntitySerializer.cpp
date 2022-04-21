@@ -1,29 +1,33 @@
 #include "EntitySerializer.h"
 
-#include <nlohmann/json.hpp>
-
-/*
-   auto jsonObject = json::object();
-    jsonObject["mainAddress"] = connectionInfo._mainAddress;
-    jsonObject["additionalAddress"] = connectionInfo._additionalAddress;
-    jsonObject["password"] = connectionInfo._password;
-    return jsonObject.dump(4);
-
-    auto jsonObject = json::parse(str);
-    return ConnectionInfo{
-        jsonObject["mainAddress"].get<std::string>(),
-        jsonObject["additionalAddress"].get<std::string>(),
-        jsonObject["password"].get<std::string>(),
-    };
-
-*/
-
-std::string EntitySerializer::toString(const IEntity* entity)
+std::string EntitySerializer::toString(const IEntity* entity) const
 {
-    return "";
+    return toJson(entity).dump();
 }
 
-IEntity* EntitySerializer::toEntity(const std::string& str)
+IEntity* EntitySerializer::toEntity(const std::string& str) const
 {
+    auto jsonObject = nlohmann::json::parse(str);
+    auto type = jsonObject["type"].get<std::string>();
+    auto id = jsonObject["type"].get<std::string>();
     return nullptr;
+}
+
+nlohmann::json EntitySerializer::toJson(const IEntity* entity) const
+{
+    auto jsonObject = nlohmann::json::object();
+    jsonObject["type"] = entity->type();
+    jsonObject["id"] = entity->id();
+    auto jsonProperties = nlohmann::json::array();
+    for (const auto& propertyName : entity->listPropertyNames())
+    {
+        const auto& property = entity->property(propertyName);
+        auto jsonProperty = nlohmann::json::object();
+        jsonProperty["name"] = property.name();
+        jsonProperty["displayName"] = property.displayName();
+        //jsonProperty["data"] = property.data();
+        jsonProperties.push_back(jsonProperty);
+    }
+    jsonObject["properties"] = jsonProperties;
+    return jsonObject;
 }
