@@ -16,6 +16,10 @@ public:
     virtual Property& operator[](const std::string& name) = 0;
 
     virtual const Property& operator[](const std::string& name) const = 0;
+
+    virtual IEntity* getSubEntity(const std::string& name) = 0;
+
+    virtual const IEntity* getSubEntity(const std::string& name) const = 0;
 };
 
 #endif //_IENTITY_H_
