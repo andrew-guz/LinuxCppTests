@@ -7,16 +7,14 @@
 #include "Singleton.h"
 #include "Entity.h"
 
-typedef std::function<Entity*(const std::string&)> EntityCreationFunction;
+typedef std::function<Entity*(const Uuid&)> EntityCreationFunction;
 
 class EntityFactory final : public Singleton<EntityFactory>
 {
 public:
-    virtual ~EntityFactory() = default;
-
     void registercreationFunction(const std::string& type, EntityCreationFunction function);
 
-    Entity* createEntity(const std::string& type, const std::string& id) const;
+    Entity* createEntity(const std::string& type, const Uuid& id) const;
 
 private:
     std::map<std::string, EntityCreationFunction> _creators;

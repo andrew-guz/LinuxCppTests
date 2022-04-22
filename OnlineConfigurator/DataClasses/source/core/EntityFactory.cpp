@@ -6,10 +6,10 @@ void EntityFactory::registercreationFunction(const std::string& type, EntityCrea
 {
     auto iter = _creators.find(type);
     assert(iter == _creators.end());
-    _creators.insert(std::make_pair(type, function));
+    _creators.emplace(type, function);
 }
 
-Entity* EntityFactory::createEntity(const std::string& type, const std::string& id) const
+Entity* EntityFactory::createEntity(const std::string& type, const Uuid& id) const
 {
     auto iter = _creators.find(type);
     assert(iter != _creators.end());

@@ -1,5 +1,6 @@
 #include "EntitySerializer.h"
 
+#include "UuidSerializer.h"
 #include "VariantSerializer.h"
 #include "EntitySerializerFactory.h"
 #include "EntityFactory.h"
@@ -8,7 +9,7 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity) const
 {
     auto jsonObject = nlohmann::json::object();
     jsonObject["type"] = entity->type();
-    jsonObject["id"] = entity->id();
+    jsonObject["id"] = UuidSerializer::toJson(entity->id());
     auto jsonProperties = nlohmann::json::array();
     for (const auto& propertyName : entity->listPropertyNames())
     {
@@ -38,7 +39,7 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity) const
 IEntity* EntitySerializer::toEntity(const nlohmann::json& jsonObject) const
 {
     auto type = jsonObject["type"].get<std::string>();
-    auto id = jsonObject["id"].get<std::string>();
+    auto id = UuidSerializer::fromJson(jsonObject["id"]);
     auto entity = EntityFactory::instance()->createEntity(type, id);
     for (const auto& jsonProperty : jsonObject["properties"])
     {

@@ -3,14 +3,10 @@
 #include <cassert>
 #include <algorithm>
 
-Entity::Entity()
+Entity::Entity(const Uuid& id) :
+    _id(id)
 {
-    uuid_generate_random(_id);
-}
 
-Entity::Entity(const uuid_t& id)
-{
-    uuid_copy(_id, id);
 }
 
 Entity::~Entity()
@@ -19,7 +15,7 @@ Entity::~Entity()
         delete pair.second;
 }
 
-const uuid_t& Entity::id() const
+const Uuid& Entity::id() const
 {
     return _id;
 }
@@ -82,10 +78,10 @@ const IEntity* Entity::subEntity(const std::string& name) const
 
 void Entity::addProperty(const std::string& name, const std::string& displayName, const Variant& data)
 {
-    _properties.insert(std::make_pair(name, Property(name, displayName, data)));
+    _properties.emplace(name, Property(name, displayName, data));
 }
 
 void Entity::addSubEntity(const std::string& name, IEntity* entity)
 {
-    _subEntities.insert(std::make_pair(name, entity));
+    _subEntities.emplace(name, entity);
 }

@@ -4,7 +4,7 @@
 
 nlohmann::json VariantSerializer::toJson(const Variant& data)
 {
-    auto jsonObject = nlohmann::json::object();    
+    auto jsonObject = nlohmann::json::object();
     if (data.isEmpty())
         jsonObject["empty"] = "empty";
     else

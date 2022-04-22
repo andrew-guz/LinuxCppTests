@@ -2,8 +2,8 @@
 #define _IENTITY_H_
 
 #include <vector>
-#include <uuid/uuid.h>
 
+#include "Uuid.h"
 #include "Property.h"
 
 class IEntity
@@ -14,7 +14,7 @@ public:
 public:
     virtual const std::string& type() const = 0;
 
-    virtual const uuid_t& id() const = 0;
+    virtual const Uuid& id() const = 0;
 
     virtual std::vector<std::string> listPropertyNames() const = 0; 
 
