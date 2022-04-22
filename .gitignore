@@ -45,7 +45,7 @@ MemorySizeTest/Makefile
 OnlineConfigurator/Makefile
 OnlineConfigurator/DataClasses/Makefile
 RestbedserverTest1/Makefile
+OnlineConfigurator/OnlineConfigurator/Makefile
 
 #logs
 *.log
-
