@@ -5,7 +5,7 @@
 #include "EntitySerializerFactory.h"
 #include "EntityFactory.h"
 
-nlohmann::json EntitySerializer::toJson(const IEntity* entity) const
+nlohmann::json EntitySerializer::toJson(const IEntity* entity, bool withSubEntities) const
 {
     auto jsonObject = nlohmann::json::object();
     jsonObject["type"] = entity->type();
@@ -22,15 +22,18 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity) const
     }
     jsonObject["properties"] = jsonProperties;
     auto jsonSubEntities = nlohmann::json::array();
-    for (const auto& subEntityName : entity->listSubEntityNames())
+    if (withSubEntities)
     {
-        const auto& subEntity = entity->subEntity(subEntityName);
-        auto jsonSubEntity = nlohmann::json::object();
-        jsonSubEntity["type"] = subEntity->type();
-        jsonSubEntity["name"] = subEntityName;
-        auto serializer = EntitySerializerFactory::instance()->createSerializer(subEntity->type());
-        jsonSubEntity["entity"] = serializer->toJson(subEntity);
-        jsonSubEntities.push_back(jsonSubEntity);
+        for (const auto& subEntityName : entity->listSubEntityNames())
+        {
+            const auto& subEntity = entity->subEntity(subEntityName);
+            auto jsonSubEntity = nlohmann::json::object();
+            jsonSubEntity["type"] = subEntity->type();
+            jsonSubEntity["name"] = subEntityName;
+            auto serializer = EntitySerializerFactory::instance()->createSerializer(subEntity->type());
+            jsonSubEntity["entity"] = serializer->toJson(subEntity);
+            jsonSubEntities.push_back(jsonSubEntity);
+        }
     }
     jsonObject["subEntities"] = jsonSubEntities;
     return jsonObject;
