@@ -43,6 +43,7 @@ CMakeTest1/Makefile
 JsonTest1/Makefile
 MemorySizeTest/Makefile
 OnlineConfigurator/DataClasses/Makefile
+RestbedserverTest1/Makefile
 
 #logs
 *.log
