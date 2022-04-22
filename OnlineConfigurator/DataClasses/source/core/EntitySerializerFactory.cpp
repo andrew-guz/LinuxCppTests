@@ -2,6 +2,12 @@
 
 #include <cassert>
 
+bool EntitySerializerFactory::isRegistered(const std::string& type) const
+{
+    auto iter = _serializers.find(type);
+    return iter != _serializers.end();
+}
+
 void EntitySerializerFactory::registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer)
 {
     auto iter = _serializers.find(type);

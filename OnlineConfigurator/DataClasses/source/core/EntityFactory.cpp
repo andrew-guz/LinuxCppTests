@@ -2,6 +2,12 @@
 
 #include <cassert>
 
+bool EntityFactory::isRegistered(const std::string& type) const
+{
+    auto iter = _creators.find(type);
+    return iter != _creators.end();
+}
+
 void EntityFactory::registerCreationFunction(const std::string& type, EntityCreationFunction function)
 {
     auto iter = _creators.find(type);
