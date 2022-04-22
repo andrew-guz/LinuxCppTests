@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-void EntityFactory::registercreationFunction(const std::string& type, EntityCreationFunction function)
+void EntityFactory::registerCreationFunction(const std::string& type, EntityCreationFunction function)
 {
     auto iter = _creators.find(type);
     assert(iter == _creators.end());

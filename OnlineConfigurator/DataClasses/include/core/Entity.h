@@ -8,13 +8,13 @@
 class Entity : public IEntity
 {
 public:
-    Entity() = default;
-
-    Entity(const Uuid& id);
+    Entity(const std::string& type, const Uuid& id = {});
 
     virtual ~Entity();
 
 public:
+    virtual const std::string& type() const override final;
+
     virtual const Uuid& id() const override final;
 
     virtual std::vector<std::string> listPropertyNames() const override final;
@@ -35,6 +35,7 @@ protected:
     void addSubEntity(const std::string& name, IEntity* entity);
 
 private:
+    const std::string               _type;
     Uuid                            _id;
     std::map<std::string, Property> _properties;
     std::map<std::string, IEntity*> _subEntities;

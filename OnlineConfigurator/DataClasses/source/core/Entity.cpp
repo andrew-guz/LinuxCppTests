@@ -5,7 +5,8 @@
 
 #include "EntityPool.h"
 
-Entity::Entity(const Uuid& id) :
+Entity::Entity(const std::string& type, const Uuid& id) :
+    _type(type),
     _id(id)
 {
     EntityPool::instance()->add(this);
@@ -16,6 +17,11 @@ Entity::~Entity()
     for (auto& pair : _subEntities)
         delete pair.second;
     EntityPool::instance()->remove(this);
+}
+
+const std::string& Entity::type() const
+{
+    return _type;
 }
 
 const Uuid& Entity::id() const

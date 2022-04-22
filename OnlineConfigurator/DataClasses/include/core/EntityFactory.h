@@ -12,7 +12,7 @@ typedef std::function<Entity*(const Uuid&)> EntityCreationFunction;
 class EntityFactory final : public Singleton<EntityFactory>
 {
 public:
-    void registercreationFunction(const std::string& type, EntityCreationFunction function);
+    void registerCreationFunction(const std::string& type, EntityCreationFunction function);
 
     Entity* createEntity(const std::string& type, const Uuid& id) const;
 
