@@ -3,16 +3,19 @@
 #include <cassert>
 #include <algorithm>
 
+#include "EntityPool.h"
+
 Entity::Entity(const Uuid& id) :
     _id(id)
 {
-
+    EntityPool::instance()->add(this);
 }
 
 Entity::~Entity()
 {
     for (auto& pair : _subEntities)
         delete pair.second;
+    EntityPool::instance()->remove(this);
 }
 
 const Uuid& Entity::id() const
