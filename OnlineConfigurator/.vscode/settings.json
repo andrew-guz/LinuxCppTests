@@ -1,3 +1,10 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode"
+    "makefile.extensionOutputFolder": "./.vscode",
+    "C_Cpp.default.includePath": [
+        "./DataClasses/interfaces",
+        "./DataClasses/include",
+        "./DataClasses/include/core",
+        "./OnlineConfigurator/include"
+    ],
+    "C_Cpp.errorSquiggles": "Enabled"
 }

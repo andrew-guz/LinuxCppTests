@@ -12,6 +12,9 @@ project(${PROJECT_NAME})
 
 #where to search headers
 include_directories(./include)
+include_directories(../DataClasses/interfaces)
+include_directories(../DataClasses/include)
+include_directories(../DataClasses/include/core)
 
 #set variable where to put ouput file
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
