@@ -6,5 +6,8 @@
         "./DataClasses/include/core",
         "./OnlineConfigurator/include"
     ],
-    "C_Cpp.errorSquiggles": "Enabled"
+    "C_Cpp.errorSquiggles": "Enabled",
+    "files.associations": {
+        "restbed": "cpp"
+    }
 }
