@@ -1,6 +1,5 @@
 #include "EntitySerializer.h"
 
-#include "UuidSerializer.h"
 #include "VariantSerializer.h"
 #include "EntitySerializerFactory.h"
 #include "EntityFactory.h"
@@ -11,7 +10,7 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity, bool recursive) c
     if (!recursive)
         jsonObject["partial"] = true;
     jsonObject["type"] = entity->type();
-    jsonObject["id"] = UuidSerializer::toJson(entity->id());
+    jsonObject["id"] = entity->id().data();
     auto jsonProperties = nlohmann::json::array();
     for (const auto& propertyName : entity->listPropertyNames())
     {
@@ -36,7 +35,7 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity, bool recursive) c
             jsonSubEntity["entity"] = serializer->toJson(subEntity, recursive);
         }
         else
-            jsonSubEntity["id"] = UuidSerializer::toJson(subEntity->id());
+            jsonSubEntity["id"] = subEntity->id().data();
         jsonSubEntities.push_back(jsonSubEntity);
     }
     jsonObject["subEntities"] = jsonSubEntities;
@@ -48,7 +47,7 @@ IEntity* EntitySerializer::toEntity(const nlohmann::json& jsonObject) const
     if (jsonObject.contains("partial"))
         return nullptr;
     auto type = jsonObject["type"].get<std::string>();
-    auto id = UuidSerializer::fromJson(jsonObject["id"]);
+    auto id = Uuid(jsonObject["id"].get<std::string>());
     auto entity = EntityFactory::instance()->createEntity(type, id);
     for (const auto& jsonProperty : jsonObject["properties"])
     {
