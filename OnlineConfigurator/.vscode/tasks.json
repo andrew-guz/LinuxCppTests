@@ -12,6 +12,19 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "build & run",
+            "type": "shell",
+            "command": "./bin/OnlineConfigurator",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "dependsOn": [
+                "build"
+            ]
         }
     ]
 }

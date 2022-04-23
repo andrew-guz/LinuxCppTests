@@ -8,7 +8,7 @@ class EntitySerializer : public ISerializer
 public:
     virtual ~EntitySerializer() = default;
 
-    virtual nlohmann::json toJson(const IEntity* entity, bool recursive = true) const override;
+    virtual nlohmann::json toJson(const IEntity* entity, bool recursive) const override;
 
     virtual IEntity* toEntity(const nlohmann::json& jsonObject) const override;
 };

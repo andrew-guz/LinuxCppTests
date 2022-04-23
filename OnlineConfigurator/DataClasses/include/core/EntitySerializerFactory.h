@@ -15,7 +15,7 @@ public:
 
     void registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer);
 
-    std::shared_ptr<ISerializer> createSerializer(const std::string& type);
+    std::shared_ptr<ISerializer> getSerializer(const std::string& type);
 
 private:
     std::map<std::string, std::shared_ptr<ISerializer>> _serializers;

@@ -15,7 +15,7 @@ void EntitySerializerFactory::registerSerializer(const std::string& type, std::s
     _serializers.emplace(type, serializer);
 }
 
-std::shared_ptr<ISerializer> EntitySerializerFactory::createSerializer(const std::string& type)
+std::shared_ptr<ISerializer> EntitySerializerFactory::getSerializer(const std::string& type)
 {
     auto iter = _serializers.find(type);
     assert(iter != _serializers.end());

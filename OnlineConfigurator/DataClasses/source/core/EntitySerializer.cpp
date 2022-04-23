@@ -32,11 +32,11 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity, bool recursive) c
         jsonSubEntity["name"] = subEntityName;
         if (recursive)
         {
-            auto serializer = EntitySerializerFactory::instance()->createSerializer(subEntity->type());
-            jsonSubEntity["entity"] = serializer->toJson(subEntity);
+            auto serializer = EntitySerializerFactory::instance()->getSerializer(subEntity->type());
+            jsonSubEntity["entity"] = serializer->toJson(subEntity, recursive);
         }
         else
-            jsonObject["id"] = UuidSerializer::toJson(subEntity->id());
+            jsonSubEntity["id"] = UuidSerializer::toJson(subEntity->id());
         jsonSubEntities.push_back(jsonSubEntity);
     }
     jsonObject["subEntities"] = jsonSubEntities;
@@ -62,7 +62,7 @@ IEntity* EntitySerializer::toEntity(const nlohmann::json& jsonObject) const
         auto type = jsonSubEntity["type"].get<std::string>();
         auto name = jsonSubEntity["name"].get<std::string>();
         auto jsonData = jsonSubEntity["data"];
-        auto serializer = EntitySerializerFactory::instance()->createSerializer(type);
+        auto serializer = EntitySerializerFactory::instance()->getSerializer(type);
         entity->addSubEntity(name, serializer->toEntity(jsonData));
     }
     return entity;
