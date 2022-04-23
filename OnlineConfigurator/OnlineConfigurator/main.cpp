@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Project.h"
+#include "GetProjectResource.h"
 #include "GetEntityResource.h"
 
 int main()
@@ -12,6 +13,7 @@ int main()
     settings->set_default_header("Connection", "close");
 
     restbed::Service service;
+    service.publish(std::make_shared<GetProjectResource>(project));
     service.publish(std::make_shared<GetEntityResource>(project));
     service.start(settings);
 
