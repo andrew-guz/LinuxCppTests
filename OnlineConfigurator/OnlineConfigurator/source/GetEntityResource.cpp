@@ -1,6 +1,6 @@
 #include "GetEntityResource.h"
 
-#include "EntityPool.h"
+#include "ResourceHelper.h"
 #include "EntitySerializerFactory.h"
 
 GetEntityResource::GetEntityResource(Project& project) :
@@ -11,17 +11,13 @@ GetEntityResource::GetEntityResource(Project& project) :
 
 void GetEntityResource::callback(const std::shared_ptr<restbed::Session> session)
 {
-    const auto request = session->get_request();
-    if (request->has_path_parameter("id"))
+    auto entity = ResourceHelper::getEntity(session);
+    if (entity)
     {
-        auto entity = EntityPool::instance()->find(request->get_path_parameter("id"));
-        if (entity)
-        {
-            auto serializer = EntitySerializerFactory::instance()->getSerializer(entity->type());
-            auto jsonObject = serializer->toJson(entity, false);
-            session->close(restbed::OK, jsonObject.dump(4));
-            return;
-        }
+        auto serializer = EntitySerializerFactory::instance()->getSerializer(entity->type());
+        auto jsonObject = serializer->toJson(entity, false);
+        session->close(restbed::OK, jsonObject.dump(4));
+        return;
     }
     session->close(restbed::BAD_REQUEST);
 }

@@ -19,11 +19,15 @@ public:
 
     virtual std::vector<std::string> listPropertyNames() const override final;
 
+    virtual bool hasProperty(const std::string& name) const override final;
+
     virtual Property& property(const std::string& name) override  final;
 
     virtual const Property& property(const std::string& name) const override final;
 
     virtual std::vector<std::string> listSubEntityNames() const override final;
+
+    virtual bool hasSubEntity(const std::string& name) const override final;
 
     virtual IEntity* subEntity(const std::string& name) override final;
 

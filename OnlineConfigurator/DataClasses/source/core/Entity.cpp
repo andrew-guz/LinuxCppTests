@@ -30,6 +30,13 @@ const Uuid& Entity::id() const
 }
 
 template<typename T>
+bool contains(const std::map<std::string, T>& map, const std::string& name)
+{
+    auto iter = map.find(name);
+    return iter != map.end();
+}
+
+template<typename T>
 T& search(std::map<std::string, T>& map, const std::string& name)
 {
     auto iter = map.find(name);
@@ -60,6 +67,11 @@ std::vector<std::string> Entity::listPropertyNames() const
     return list(_properties);
 }
 
+bool Entity::hasProperty(const std::string& name) const
+{
+    return contains(_properties, name);
+}
+
 Property& Entity::property(const std::string& name)
 {
     return search(_properties, name);
@@ -73,6 +85,11 @@ const Property& Entity::property(const std::string& name) const
 std::vector<std::string> Entity::listSubEntityNames() const
 {
     return list(_subEntities);
+}
+
+bool Entity::hasSubEntity(const std::string& name) const
+{
+    return contains(_subEntities, name);
 }
 
 IEntity* Entity::subEntity(const std::string& name)
