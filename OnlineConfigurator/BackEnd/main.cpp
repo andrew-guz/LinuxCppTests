@@ -6,12 +6,25 @@
 #include "GetPropertyResource.h"
 #include "UpdatePropertyResource.h"
 
-int main()
-{
+int main(int argc, char* argv[])
+{    
+    if (argc < 2)
+        return -1;
+    auto portStr = argv[1];
+    int port = -1;
+    try
+    {
+        port = atoi(portStr);        
+    }
+    catch(...)
+    {
+        return -1;
+    }   
+
     Project project;
 
     auto settings = std::make_shared<restbed::Settings>();
-    settings->set_port(8080);
+    settings->set_port(port);
     settings->set_default_header("Connection", "close");
 
     restbed::Service service;

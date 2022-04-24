@@ -14,9 +14,22 @@
             }
         },
         {
-            "label": "build & run",
+            "label": "build & run BackEnd",
             "type": "shell",
-            "command": "./bin/BackEnd",
+            "command": "./bin/BackEnd 8081",
+            "problemMatcher": [],
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "dependsOn": [
+                "build"
+            ]
+        },
+        {
+            "label": "build & run FrontEnd",
+            "type": "shell",
+            "command": "./bin/FrontEnd --docroot . --http-address 0.0.0.0 --http-port 8080",
             "problemMatcher": [],
             "group": {
                 "kind": "none",
