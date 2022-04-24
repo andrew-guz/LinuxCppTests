@@ -25,9 +25,9 @@ int main()
 
     auto project4 = new Project();;
     std::cout << project4->listSubEntityNames().size() << std::endl;
-    auto project4Json = EntitySerializer().toJson(project4, false);
+    auto project4Json = EntitySerializerFactory::instance()->getSerializer(project4->type())->toJson(project4, false);
     delete project4;
-    auto project5 = EntitySerializer().toEntity(project4Json);
+    auto project5 = EntitySerializerFactory::instance()->getSerializer(project4Json["type"].get<std::string>())->toEntity(project4Json);
     std::cout << project5->listSubEntityNames().size() << std::endl;
     delete project5;
 
