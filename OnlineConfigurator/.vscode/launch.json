@@ -8,8 +8,10 @@
             "name": "build & debug BackEnd",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/BackEnd 8081",
-            "args": [],
+            "program": "${workspaceFolder}/bin/BackEnd",
+            "args": [
+                "8081"
+            ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
@@ -33,8 +35,15 @@
             "name": "build & debug FrontEndEnd",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/FrontEnd --docroot . --http-address 0.0.0.0 --http-port 8080",
-            "args": [],
+            "program": "${workspaceFolder}/bin/FrontEnd",
+            "args": [
+                "--docroot",
+                ".",
+                "--http-address",
+                "0.0.0.0",
+                "--http-port",
+                "8080"
+            ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
