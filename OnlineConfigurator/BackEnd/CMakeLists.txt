@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 # common variable for project name and executable name
-set(PROJECT_NAME "OnlineConfigurator")
+set(PROJECT_NAME "BackEnd")
 
 #build in Debug mode
 set(CMAKE_BUILD_TYPE Debug)

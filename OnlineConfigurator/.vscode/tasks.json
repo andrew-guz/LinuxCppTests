@@ -16,7 +16,7 @@
         {
             "label": "build & run",
             "type": "shell",
-            "command": "./bin/OnlineConfigurator",
+            "command": "./bin/BackEnd",
             "problemMatcher": [],
             "group": {
                 "kind": "none",
