@@ -3,6 +3,7 @@
 #include "Project.h"
 #include "GetProjectResource.h"
 #include "GetEntityResource.h"
+#include "GetEntitySubEntitiesResource.h"
 #include "GetPropertyResource.h"
 #include "UpdatePropertyResource.h"
 
@@ -30,6 +31,7 @@ int main(int argc, char* argv[])
     restbed::Service service;
     service.publish(std::make_shared<GetProjectResource>(project));
     service.publish(std::make_shared<GetEntityResource>(project));
+    service.publish(std::make_shared<GetEntitySubEntitiesResource>(project));
     service.publish(std::make_shared<GetPropertyResource>(project));
     service.publish(std::make_shared<UpdatePropertyResource>(project));
     service.start(settings);

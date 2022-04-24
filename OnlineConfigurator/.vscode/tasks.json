@@ -16,7 +16,10 @@
         {
             "label": "build & run BackEnd",
             "type": "shell",
-            "command": "./bin/BackEnd 8081",
+            "command": "./bin/BackEnd",
+            "args": [
+                "8081"
+            ],
             "problemMatcher": [],
             "group": {
                 "kind": "none",
@@ -29,7 +32,15 @@
         {
             "label": "build & run FrontEnd",
             "type": "shell",
-            "command": "./bin/FrontEnd --docroot . --http-address 0.0.0.0 --http-port 8080",
+            "command": "./bin/FrontEnd",
+            "args": [
+                "--docroot",
+                ".",
+                "--http-address",
+                "0.0.0.0",
+                "--http-port",
+                "8080"
+            ],
             "problemMatcher": [],
             "group": {
                 "kind": "none",
