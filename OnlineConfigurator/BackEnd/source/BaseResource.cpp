@@ -1,8 +1,11 @@
 #include "BaseResource.h"
 
-BaseResource::BaseResource(Project& project, const std::string& path, const std::string& method) :
+BaseResource::BaseResource(Project& project, const std::string& path, const BaseResourceMethodsConfig& config) :
     _project(project)
 {
     set_path(path);
-    set_method_handler("GET", std::bind(&BaseResource::callback, this, std::placeholders::_1));
+    if (config._get)
+        set_method_handler("GET", std::bind(&BaseResource::callbackGet, this, std::placeholders::_1));
+    if (config._put)
+        set_method_handler("PUT", std::bind(&BaseResource::callbackPut, this, std::placeholders::_1));
 }

@@ -1,19 +1,19 @@
-#include "GetEntitySubEntitiesResource.h"
+#include "SubEntitiesResource.h"
 
 #include <iostream>
 
 #include "ResourceHelper.h"
 #include "EntitySerializerFactory.h"
 
-GetEntitySubEntitiesResource::GetEntitySubEntitiesResource(Project& project) :
-    BaseResource(project, "subEntities/{id: [0-9a-zA-Z-]{36}}", "GET")
+SubEntitiesResource::SubEntitiesResource(Project& project) :
+    BaseResource(project, "subEntities/{id: [0-9a-zA-Z-]{36}}", { true, false })
 {
 
 }
 
-void GetEntitySubEntitiesResource::callback(const std::shared_ptr<restbed::Session> session)
+void SubEntitiesResource::callbackGet(const std::shared_ptr<restbed::Session> session)
 {
-    std::cout << "GetEntitySubEntitiesResource: " << session->get_request()->get_path() << std::endl;
+    std::cout << "SubEntitiesResource GET: " << session->get_request()->get_path() << std::endl;
     auto entity = ResourceHelper::getEntity(session);
     if (entity)
     {
