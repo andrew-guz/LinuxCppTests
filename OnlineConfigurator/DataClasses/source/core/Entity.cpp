@@ -5,8 +5,9 @@
 
 #include "EntityPool.h"
 
-Entity::Entity(const std::string& type, const Uuid& id) :
+Entity::Entity(const std::string& type, bool withSubEntities, const Uuid& id) :
     _type(type),
+    _withSubEntities(withSubEntities),
     _id(id)
 {
     EntityPool::instance()->add(this);
@@ -105,9 +106,4 @@ const IEntity* Entity::subEntity(const std::string& name) const
 void Entity::addProperty(const std::string& name, const std::string& displayName, const Variant& data)
 {
     _properties.emplace(name, Property(name, displayName, data));
-}
-
-void Entity::addSubEntity(const std::string& name, IEntity* entity)
-{
-    _subEntities.emplace(name, entity);
 }

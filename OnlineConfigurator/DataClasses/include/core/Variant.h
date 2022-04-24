@@ -14,8 +14,6 @@ struct IsVariantMember<T, std::variant<ALL_T...>>  : public std::disjunction<std
 
 class Variant final
 {
-private:
-
 public:
     Variant() = default;
 
@@ -45,7 +43,6 @@ public:
 
     bool operator!=(const Variant& other) const;
 
-public:
     bool isEmpty() const;
 
     int typeIndex() const;

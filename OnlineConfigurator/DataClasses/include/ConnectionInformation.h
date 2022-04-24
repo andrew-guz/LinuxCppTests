@@ -6,7 +6,7 @@
 class ConnectionInformation final : public Entity
 {
 public:
-    ConnectionInformation(const Uuid& id = {});
+    ConnectionInformation(bool withSubEntities = true, const Uuid& id = {});
 
     virtual ~ConnectionInformation() = default;
 };

@@ -1,16 +1,12 @@
 #include "ConnectionInformation.h"
 
-#include "EntityBuildHelper.h"
-
-ConnectionInformation::ConnectionInformation(const Uuid& id) :
-    Entity("connectionInformation", id)
-{
-    CTOR(ConnectionInformation);
-    
+ConnectionInformation::ConnectionInformation(bool withSubEntities, const Uuid& id) :
+    Entity("connectionInformation", withSubEntities, id)
+{   
     //fill properties
-    addProperty("mainAddress", "Main address", std::string());
-    addProperty("additionalAddress", "Additional address", std::string());
-    addProperty("password", "Password", std::string());
+    addProperty("mainAddress", u8"Основной адрес", std::string());
+    addProperty("additionalAddress", u8"Дополнительный адрес", std::string());
+    addProperty("password", u8"Пароль", std::string());
     
     //fill subEntities
 }

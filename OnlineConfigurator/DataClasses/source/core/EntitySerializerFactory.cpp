@@ -2,17 +2,12 @@
 
 #include <cassert>
 
-bool EntitySerializerFactory::isRegistered(const std::string& type) const
-{
-    auto iter = _serializers.find(type);
-    return iter != _serializers.end();
-}
+#include "EntitySerializer.h"
 
-void EntitySerializerFactory::registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer)
+EntitySerializerFactory::EntitySerializerFactory()
 {
-    auto iter = _serializers.find(type);
-    assert(iter == _serializers.end());
-    _serializers.emplace(type, serializer);
+    registerSerializer("connectionInformation", std::make_shared<EntitySerializer>());
+    registerSerializer("project",               std::make_shared<EntitySerializer>());
 }
 
 std::shared_ptr<ISerializer> EntitySerializerFactory::getSerializer(const std::string& type)
@@ -20,4 +15,11 @@ std::shared_ptr<ISerializer> EntitySerializerFactory::getSerializer(const std::s
     auto iter = _serializers.find(type);
     assert(iter != _serializers.end());
     return iter->second;
+}
+
+void EntitySerializerFactory::registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer)
+{
+    auto iter = _serializers.find(type);
+    assert(iter == _serializers.end());
+    _serializers.emplace(type, serializer);
 }

@@ -5,17 +5,17 @@
 #include <map>
 
 #include "Singleton.h"
-#include "IFactory.h"
 #include "ISerializer.h"
 
-class EntitySerializerFactory final : public Singleton<EntitySerializerFactory>, public ITypeFactory
+class EntitySerializerFactory final : public Singleton<EntitySerializerFactory>
 {
 public:
-    virtual bool isRegistered(const std::string& type) const override;
-
-    void registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer);
+    EntitySerializerFactory();
 
     std::shared_ptr<ISerializer> getSerializer(const std::string& type);
+
+protected:
+    void registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer);
 
 private:
     std::map<std::string, std::shared_ptr<ISerializer>> _serializers;

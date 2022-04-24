@@ -5,19 +5,19 @@
 #include <map>
 
 #include "Singleton.h"
-#include "IFactory.h"
 #include "Entity.h"
 
-typedef std::function<Entity*(const Uuid&)> EntityCreationFunction;
+typedef std::function<Entity*(bool, const Uuid&)> EntityCreationFunction;
 
-class EntityFactory final : public Singleton<EntityFactory>, public ITypeFactory
+class EntityFactory final : public Singleton<EntityFactory>
 {
 public:
-    virtual bool isRegistered(const std::string& type) const override;
+    EntityFactory();
 
+    Entity* createEntity(const std::string& type, bool withSubEntities, const Uuid& id) const;
+
+protected:
     void registerCreationFunction(const std::string& type, EntityCreationFunction function);
-
-    Entity* createEntity(const std::string& type, const Uuid& id) const;
 
 private:
     std::map<std::string, EntityCreationFunction> _creators;

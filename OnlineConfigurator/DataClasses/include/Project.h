@@ -6,7 +6,7 @@
 class Project final : public Entity
 {
 public:
-    Project(const Uuid& id = {});
+    Project(bool withSubEntities = true, const Uuid& id = {});
 
     virtual ~Project() = default;
 };

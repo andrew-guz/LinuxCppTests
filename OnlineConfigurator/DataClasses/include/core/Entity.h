@@ -5,14 +5,17 @@
 
 #include "IEntity.h"
 
+#define SET_TYPE(TYPE) static const std::string _type = TYPE;
+
 class Entity : public IEntity
 {
 public:
-    Entity(const std::string& type, const Uuid& id = {});
+    Entity(const std::string& type, bool withSubEntities = true, const Uuid& id = {});
+
+    Entity(const Entity& other) = delete;
 
     virtual ~Entity();
 
-public:
     virtual const std::string& type() const override final;
 
     virtual const Uuid& id() const override final;
@@ -36,10 +39,16 @@ public:
 protected:
     void addProperty(const std::string& name, const std::string& displayName, const Variant& data = {});
 
-    void addSubEntity(const std::string& name, IEntity* entity);
+    template<typename T>
+    void addSubEntity(const std::string& name)
+    {
+        if(_withSubEntities)
+            _subEntities.emplace(name, new T(true));
+    }
 
 private:
     const std::string               _type;
+    bool                            _withSubEntities;
     Uuid                            _id;
     std::map<std::string, Property> _properties;
     std::map<std::string, IEntity*> _subEntities;

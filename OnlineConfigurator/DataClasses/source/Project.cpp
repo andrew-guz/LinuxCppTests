@@ -1,16 +1,13 @@
 #include "Project.h"
 
-#include "EntityBuildHelper.h"
 #include "ConnectionInformation.h"
 
-Project::Project(const Uuid& id) :
-    Entity("project", id)
+Project::Project(bool withSubEntities, const Uuid& id) :
+    Entity("project", withSubEntities, id)
 {
-    CTOR(Project);
-    
     //fill properties
-    addProperty("name", "Name", std::string());
+    addProperty("name", u8"Имя контроллера", std::string());
     
     //fill subEntities
-    addSubEntity("connectionInformation", new ConnectionInformation());
+    addSubEntity<ConnectionInformation>("connectionInformation");
 }

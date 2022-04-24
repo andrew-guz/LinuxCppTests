@@ -2,10 +2,20 @@
 
 #include <cassert>
 
-bool EntityFactory::isRegistered(const std::string& type) const
+#include "ConnectionInformation.h"
+#include "Project.h"
+
+EntityFactory::EntityFactory()
+{
+    registerCreationFunction("connectionInformation",   [](bool withSubEntities, const Uuid& id) { return new ConnectionInformation(withSubEntities, id); });
+    registerCreationFunction("project",                 [](bool withSubEntities, const Uuid& id) { return new Project(withSubEntities, id); });
+}
+
+Entity* EntityFactory::createEntity(const std::string& type, bool withSubEntities, const Uuid& id) const
 {
     auto iter = _creators.find(type);
-    return iter != _creators.end();
+    assert(iter != _creators.end());
+    return (iter->second)(withSubEntities, id);
 }
 
 void EntityFactory::registerCreationFunction(const std::string& type, EntityCreationFunction function)
@@ -13,11 +23,4 @@ void EntityFactory::registerCreationFunction(const std::string& type, EntityCrea
     auto iter = _creators.find(type);
     assert(iter == _creators.end());
     _creators.emplace(type, function);
-}
-
-Entity* EntityFactory::createEntity(const std::string& type, const Uuid& id) const
-{
-    auto iter = _creators.find(type);
-    assert(iter != _creators.end());
-    return (iter->second)(id);
 }

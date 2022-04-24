@@ -10,7 +10,7 @@ class ISerializer
 public:
     virtual ~ISerializer() = default;
 
-    virtual nlohmann::json toJson(const IEntity* entity, bool recursive) const = 0;
+    virtual nlohmann::json toJson(const IEntity* entity, bool withSubEntities) const = 0;
 
     virtual IEntity* toEntity(const nlohmann::json& jsonObject) const = 0;
 };

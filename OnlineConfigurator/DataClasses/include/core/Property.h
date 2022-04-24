@@ -22,7 +22,6 @@ public:
 
     bool operator!=(const Property& other) const;
 
-public:
     const std::string& name() const;
 
     const std::string& displayName() const;
