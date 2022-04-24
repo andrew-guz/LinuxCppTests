@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 # common variable for project name and executable name
-set(PROJECT_NAME "Tests")
+set(PROJECT_NAME "FrontEnd")
 
 #build in Debug mode
 set(CMAKE_BUILD_TYPE Debug)
@@ -20,7 +20,7 @@ include_directories(../DataClasses/include/core)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 #set for linker path where libraries are
-#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath -Wl,/usr/local/lib")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath -Wl,/usr/local/lib")
 
 #set C++ minimum version
 set(CMAKE_CXX_STANDARD 17)
@@ -35,4 +35,4 @@ file(GLOB SRC_FILES "./source/*.cpp")
 add_executable(${PROJECT_NAME} main.cpp ${SRC_FILES})
 
 #executable needs libraries - so link to installed lisbs
-#target_link_libraries(${PROJECT_NAME} -lwt -lwthttp)
+target_link_libraries(${PROJECT_NAME} -lwt -lwthttp)

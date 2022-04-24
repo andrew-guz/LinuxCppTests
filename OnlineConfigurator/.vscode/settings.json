@@ -4,7 +4,8 @@
         "./DataClasses/interfaces",
         "./DataClasses/include",
         "./DataClasses/include/core",
-        "./OnlineConfigurator/include"
+        "./OnlineConfigurator/include",
+        "./FrontEnd/include"
     ],
     "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {
