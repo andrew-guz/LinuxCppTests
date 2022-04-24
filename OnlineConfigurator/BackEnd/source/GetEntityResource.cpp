@@ -1,5 +1,7 @@
 #include "GetEntityResource.h"
 
+#include <iostream>
+
 #include "ResourceHelper.h"
 #include "EntitySerializerFactory.h"
 
@@ -11,6 +13,7 @@ GetEntityResource::GetEntityResource(Project& project) :
 
 void GetEntityResource::callback(const std::shared_ptr<restbed::Session> session)
 {
+    std::cout << "GetEntityResource: " << session->get_request()->get_path() << std::endl;
     auto entity = ResourceHelper::getEntity(session);
     if (entity)
     {

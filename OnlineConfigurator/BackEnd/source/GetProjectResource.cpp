@@ -1,6 +1,7 @@
 #include "GetProjectResource.h"
 
-#include "EntitySerializerFactory.h"
+#include <iostream>
+#include <nlohmann/json.hpp>
 
 GetProjectResource::GetProjectResource(Project& project) :
     BaseResource(project, "project", "GET")
@@ -10,7 +11,8 @@ GetProjectResource::GetProjectResource(Project& project) :
 
 void GetProjectResource::callback(const std::shared_ptr<restbed::Session> session)
 {
-    auto serializer = EntitySerializerFactory::instance()->getSerializer(_project.type());
-    auto jsonObject = serializer->toJson(&_project, false);
+    std::cout << "GetProjectResource: " << session->get_request()->get_path() << std::endl;
+    auto jsonObject = nlohmann::json::object();
+    jsonObject["id"] = _project.id().data();
     session->close(restbed::OK, jsonObject.dump(4));
 }

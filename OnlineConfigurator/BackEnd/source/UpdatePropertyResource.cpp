@@ -1,10 +1,12 @@
 #include "UpdatePropertyResource.h"
 
+#include <iostream>
+
 #include "ResourceHelper.h"
 #include "VariantSerializer.h"
 
 UpdatePropertyResource::UpdatePropertyResource(Project& project) :
-    BaseResource(project, "entity/{id: [0-9a-zA-Z-]{36}}/{propertyName: .*}", "PUT")
+    BaseResource(project, "property/{id: [0-9a-zA-Z-]{36}}/{propertyName: .*}", "PUT")
 {
 
 }
@@ -12,6 +14,7 @@ UpdatePropertyResource::UpdatePropertyResource(Project& project) :
 void UpdatePropertyResource::callback(const std::shared_ptr<restbed::Session> session)
 {
     const auto request = session->get_request();
+    std::cout << "UpdatePropertyResource: " << request->get_path() << std::endl;
     if (request->has_path_parameter("id") &&
         request->has_path_parameter("propertyName"))
     {
