@@ -44,8 +44,7 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity, bool recursive) c
 
 IEntity* EntitySerializer::toEntity(const nlohmann::json& jsonObject) const
 {
-    if (jsonObject.contains("partial"))
-        return nullptr;
+    bool partial = jsonObject.contains("partial");
     auto type = jsonObject["type"].get<std::string>();
     auto id = Uuid(jsonObject["id"].get<std::string>());
     auto entity = EntityFactory::instance()->createEntity(type, id);
@@ -56,13 +55,16 @@ IEntity* EntitySerializer::toEntity(const nlohmann::json& jsonObject) const
         auto data = VariantSerializer::fromJson(jsonProperty["data"]);
         entity->addProperty(name, displayName, data);
     }
-    for (const auto& jsonSubEntity : jsonObject["subEntities"])
+    if(partial)
     {
-        auto type = jsonSubEntity["type"].get<std::string>();
-        auto name = jsonSubEntity["name"].get<std::string>();
-        auto jsonData = jsonSubEntity["data"];
-        auto serializer = EntitySerializerFactory::instance()->getSerializer(type);
-        entity->addSubEntity(name, serializer->toEntity(jsonData));
+        for (const auto& jsonSubEntity : jsonObject["subEntities"])
+        {
+            auto type = jsonSubEntity["type"].get<std::string>();
+            auto name = jsonSubEntity["name"].get<std::string>();
+            auto jsonData = jsonSubEntity["data"];
+            auto serializer = EntitySerializerFactory::instance()->getSerializer(type);
+            entity->addSubEntity(name, serializer->toEntity(jsonData));
+        }
     }
     return entity;
 }

@@ -5,9 +5,9 @@ project(OnlineConfigurator)
 
 #subprojects
 add_subdirectory (DataClasses)
-add_subdirectory (OnlineConfigurator)
 add_subdirectory (Tests)
+add_subdirectory (OnlineConfigurator)
 
 #linkage between projects
-target_link_libraries(OnlineConfigurator DataClasses)
 target_link_libraries(Tests DataClasses)
+target_link_libraries(OnlineConfigurator DataClasses)
