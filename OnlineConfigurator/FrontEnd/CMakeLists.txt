@@ -35,4 +35,4 @@ file(GLOB SRC_FILES "./source/*.cpp")
 add_executable(${PROJECT_NAME} main.cpp ${SRC_FILES})
 
 #executable needs libraries - so link to installed lisbs
-target_link_libraries(${PROJECT_NAME} -lwt -lwthttp)
+target_link_libraries(${PROJECT_NAME} -lwt -lwthttp -pthread)
