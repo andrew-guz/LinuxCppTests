@@ -1,39 +1,65 @@
 #include <Wt/WApplication.h>
 #include <Wt/WBreak.h>
 #include <Wt/WContainerWidget.h>
+#include <Wt/WDialog.h>
+#include <Wt/WEnvironment.h>
+#include <Wt/WLabel.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
+#include <Wt/WRegExpValidator.h>
 #include <Wt/WText.h>
 
-class HelloApplication : public Wt::WApplication
+using namespace Wt;
+
+class HelloApplication : public WApplication
 {
 public:
-    HelloApplication(const Wt::WEnvironment& env);
+    HelloApplication(const WEnvironment& env) :
+        WApplication(env)
+    {
+        auto buttons = root()->addWidget(std::make_unique<WContainerWidget>());
 
-private:
-    Wt::WLineEdit *nameEdit_;
-    Wt::WText *greeting_;
+        auto button = buttons->addWidget(std::make_unique<WPushButton>("Familiar"));
+        button->clicked().connect(this, &HelloApplication::custom);
+    }
+
+    void custom()
+    {
+        /*WDialog dialog("Personalia");
+        dialog.setClosable(true);
+        dialog.setResizable(true);
+        dialog.rejectWhenEscapePressed(true);
+
+        dialog.contents()->addWidget(std::make_unique<WText>("Enter your name: "));
+        WLineEdit *edit = dialog.contents()->addWidget(std::make_unique<WLineEdit>());
+        WPushButton *ok = dialog.footer()->addWidget(std::make_unique<WPushButton>("Ok"));
+        ok->setDefault(true);
+
+        edit->setFocus();
+        ok->clicked().connect(&dialog, &WDialog::accept);
+
+        dialog.exec();*/
+
+        auto dialog = root()->addChild(std::make_unique<WDialog>("Personalia"));
+        dialog->setClosable(true);
+        dialog->setResizable(true);
+        dialog->rejectWhenEscapePressed(true);
+
+        dialog->contents()->addWidget(std::make_unique<WText>("Enter your name: "));
+        WLineEdit *edit = dialog->contents()->addWidget(std::make_unique<WLineEdit>());
+        WPushButton *ok = dialog->footer()->addWidget(std::make_unique<WPushButton>("Ok"));
+        ok->setDefault(true);
+
+        edit->setFocus();
+        ok->clicked().connect(dialog, &WDialog::accept); 
+
+        dialog->show();
+    }
 };
-
-HelloApplication::HelloApplication(const Wt::WEnvironment& env)
-    : Wt::WApplication(env)
-{
-    setTitle("Hello world");
-
-    root()->addWidget(std::make_unique<Wt::WText>("Your name, please? "));
-    nameEdit_ = root()->addWidget(std::make_unique<Wt::WLineEdit>());
-    Wt::WPushButton *button = root()->addWidget(std::make_unique<Wt::WPushButton>("Greet me."));
-    root()->addWidget(std::make_unique<Wt::WBreak>());
-    greeting_ = root()->addWidget(std::make_unique<Wt::WText>());
-    auto greet = [this]{
-      greeting_->setText("Hello there, " + nameEdit_->text());
-    };
-    button->clicked().connect(greet);
-}
 
 int main(int argc, char **argv)
 {
-    return Wt::WRun(argc, argv, [](const Wt::WEnvironment& env) {
+    return WRun(argc, argv, [](const WEnvironment& env) {
       return std::make_unique<HelloApplication>(env);
     });
 }
