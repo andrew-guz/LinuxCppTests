@@ -1,10 +1,12 @@
 #include "WaitingWindow.h"
 
+#include <chrono>
+
 #include <Wt/WApplication.h>
 #include <Wt/WDialog.h>
 #include <Wt/WText.h>
-#include <Wt/WPushButton.h>
-#include <Wt/WLineEdit.h>
+#include <Wt/WProgressBar.h>
+#include <Wt/WTimer.h>
 
 using namespace Wt;
 
@@ -13,17 +15,20 @@ void WaitingWindow::wait()
     auto application = WApplication::instance();
 
     auto dialog = application->root()->addChild(std::make_unique<WDialog>(u8"Подождите пожалуйста"));
-    dialog->setClosable(true);
-    dialog->setResizable(true);
-    dialog->rejectWhenEscapePressed(true);
+    auto progressBar = dialog->contents()->addWidget(std::make_unique<WProgressBar>());
+    progressBar->setFormat("");
+    progressBar->setRange(0.0, 10.0);
+    progressBar->setValue(0.0);
 
-    dialog->contents()->addWidget(std::make_unique<WText>("Enter your name: "));
-    WLineEdit *edit = dialog->contents()->addWidget(std::make_unique<WLineEdit>());
-    WPushButton *ok = dialog->footer()->addWidget(std::make_unique<WPushButton>("Ok"));
-    ok->setDefault(true);
+    auto intervalTimer = dialog->contents()->addChild(std::make_unique<WTimer>());
+    intervalTimer->setInterval(std::chrono::milliseconds(100));
+    intervalTimer->timeout().connect([=](){
+        if (progressBar->value() >= progressBar->maximum())
+            progressBar->setValue(progressBar->minimum());
+        else
+            progressBar->setValue(progressBar->value() + 1.0);
+    });
+    intervalTimer->start();
 
-    edit->setFocus();
-    ok->clicked().connect(dialog, &WDialog::accept); 
-
-    dialog->show();   
+    dialog->show();
 }
