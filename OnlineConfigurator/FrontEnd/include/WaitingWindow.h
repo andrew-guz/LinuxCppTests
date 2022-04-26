@@ -13,7 +13,7 @@ class WaitingWindow final : public Singleton<WaitingWindow>
 public:
     virtual ~WaitingWindow() = default;
 
-    void show(const std::string& text = "");
+    void show(const std::string& text = {});
 
     void close();
 

@@ -12,7 +12,10 @@ void WaitingWindow::show(const std::string& text)
 {
     _dialog = WApplication::instance()->root()->addChild(std::make_unique<WDialog>(u8"Подождите пожалуйста"));
     if (text.size())
+    {
         _dialog->contents()->addWidget(std::make_unique<WText>(text));
+        _dialog->contents()->addWidget(std::make_unique<WBreak>());
+    }
     auto progressBar = _dialog->contents()->addWidget(std::make_unique<WProgressBar>());
     progressBar->setFormat("");
     progressBar->setRange(0.0, 10.0);
