@@ -3,6 +3,9 @@
 #include <Wt/WGridLayout.h>
 #include <Wt/WText.h>
 #include <Wt/WLineEdit.h>
+#include <Wt/WPushButton.h>
+
+#include "WaitingWindow.h"
 
 using namespace Wt;
 
@@ -22,6 +25,7 @@ ConnectionInformationWidget::ConnectionInformationWidget() :
     _gridLayout->addWidget(std::make_unique<WText>(u8"Пароль:"), 2, 0);
     _password = _gridLayout->addWidget(std::make_unique<WLineEdit>(), 2, 1);
     _password->setEchoMode(EchoMode::Password);
+    WaitingWindow::instance()->wait();
 }
 
 ConnectionInformationWidget::~ConnectionInformationWidget()

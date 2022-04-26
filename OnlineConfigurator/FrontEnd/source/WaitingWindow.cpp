@@ -1,26 +1,29 @@
 #include "WaitingWindow.h"
 
+#include <Wt/WApplication.h>
+#include <Wt/WDialog.h>
+#include <Wt/WText.h>
 #include <Wt/WPushButton.h>
+#include <Wt/WLineEdit.h>
 
 using namespace Wt;
 
-WaitingWindow::WaitingWindow() :
-    WObject()
-{
-    
-}
-
 void WaitingWindow::wait()
 {
-    _dialog = addChild<WDialog>(std::make_unique<WDialog>(u8"Подождите пожалуйста"));
-    auto ok = _dialog->contents()->addWidget<WPushButton>(std::make_unique<WPushButton>("Ok"));
-    ok->clicked().connect(_dialog, &WDialog::accept);
-    _dialog->finished().connect(this, &WaitingWindow::dialogClosed);
-    _dialog->show();    
-}
+    auto application = WApplication::instance();
 
-void WaitingWindow::dialogClosed(Wt::DialogCode result)
-{
-    removeChild(_dialog);
-    _dialog = nullptr;
+    auto dialog = application->root()->addChild(std::make_unique<WDialog>(u8"Подождите пожалуйста"));
+    dialog->setClosable(true);
+    dialog->setResizable(true);
+    dialog->rejectWhenEscapePressed(true);
+
+    dialog->contents()->addWidget(std::make_unique<WText>("Enter your name: "));
+    WLineEdit *edit = dialog->contents()->addWidget(std::make_unique<WLineEdit>());
+    WPushButton *ok = dialog->footer()->addWidget(std::make_unique<WPushButton>("Ok"));
+    ok->setDefault(true);
+
+    edit->setFocus();
+    ok->clicked().connect(dialog, &WDialog::accept); 
+
+    dialog->show();   
 }
