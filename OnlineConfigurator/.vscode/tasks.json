@@ -36,10 +36,10 @@
             "args": [
                 "--docroot",
                 ".",
-                "--http-address",
-                "0.0.0.0",
-                "--http-port",
-                "8080",
+                "--http-listen",
+                "0.0.0.0:8080",
+                "--resources-dir",
+                "./bin/resources",
                 "--backend-port",
                 "8081"
             ],
