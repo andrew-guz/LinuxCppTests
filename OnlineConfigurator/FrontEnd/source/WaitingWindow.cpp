@@ -3,32 +3,38 @@
 #include <chrono>
 
 #include <Wt/WApplication.h>
-#include <Wt/WDialog.h>
 #include <Wt/WText.h>
 #include <Wt/WProgressBar.h>
-#include <Wt/WTimer.h>
 
 using namespace Wt;
 
-void WaitingWindow::wait()
+void WaitingWindow::show(const std::string& text)
 {
-    auto application = WApplication::instance();
-
-    auto dialog = application->root()->addChild(std::make_unique<WDialog>(u8"Подождите пожалуйста"));
-    auto progressBar = dialog->contents()->addWidget(std::make_unique<WProgressBar>());
+    _dialog = WApplication::instance()->root()->addChild(std::make_unique<WDialog>(u8"Подождите пожалуйста"));
+    if (text.size())
+        _dialog->contents()->addWidget(std::make_unique<WText>(text));
+    auto progressBar = _dialog->contents()->addWidget(std::make_unique<WProgressBar>());
     progressBar->setFormat("");
     progressBar->setRange(0.0, 10.0);
     progressBar->setValue(0.0);
 
-    auto intervalTimer = dialog->contents()->addChild(std::make_unique<WTimer>());
-    intervalTimer->setInterval(std::chrono::milliseconds(100));
-    intervalTimer->timeout().connect([=](){
+    _timer = _dialog->contents()->addChild(std::make_unique<WTimer>());
+    _timer->setInterval(std::chrono::milliseconds(100));
+    _timer->timeout().connect([=](){
         if (progressBar->value() >= progressBar->maximum())
             progressBar->setValue(progressBar->minimum());
         else
             progressBar->setValue(progressBar->value() + 1.0);
     });
-    intervalTimer->start();
+    _timer->start();
 
-    dialog->show();
+    _dialog->show();
+}
+
+void WaitingWindow::close()
+{
+    _timer->stop();
+    _timer = nullptr;
+    WApplication::instance()->removeChild(_dialog);
+    _dialog = nullptr;
 }
