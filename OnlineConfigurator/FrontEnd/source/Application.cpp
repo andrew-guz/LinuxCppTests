@@ -5,6 +5,7 @@
 #include <Wt/WText.h>
 
 #include "UrlBuilder.h"
+#include "ApplicationErrorNotifier.h"
 #include "ConnectionInformationWidget.h"
 
 using namespace nlohmann;
@@ -23,8 +24,14 @@ Application::Application(const WEnvironment& env) :
     get("project", UrlBuilder::instance()->projectUrl());
 }
 
-void Application::projectRequestDone(AsioWrapper::error_code errotCode, const Http::Message& message)
+void Application::projectRequestDone(AsioWrapper::error_code errorCode, const Http::Message& message)
 {
+    if (errorCode.failed())
+    {
+        ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
+        return;
+    }
+
     root()->addWidget(std::make_unique<Wt::WText>(message.body()));
     
     auto json = json::parse(message.body());
@@ -34,7 +41,13 @@ void Application::projectRequestDone(AsioWrapper::error_code errotCode, const Ht
     get("projectSubEntities", url);
 }
 
-void Application::projectSubEntitiesRequestDone(AsioWrapper::error_code errotCode, const Http::Message& message)
+void Application::projectSubEntitiesRequestDone(AsioWrapper::error_code errorCode, const Http::Message& message)
 {
+    if (errorCode.failed())
+    {
+        ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
+        return;
+    }
+
     root()->addWidget(std::make_unique<Wt::WText>(message.body()));   
 }

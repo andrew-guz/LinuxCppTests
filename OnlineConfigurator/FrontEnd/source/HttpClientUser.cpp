@@ -2,6 +2,8 @@
 
 #include <cassert>
 
+#include "ApplicationErrorNotifier.h"
+
 using namespace Wt;
 
 HttpClientUser::HttpClientUser()
@@ -11,28 +13,35 @@ HttpClientUser::HttpClientUser()
 
 void HttpClientUser::registerRequestDoneFunction(const std::string& requestName, RequestDoneFunction func)
 {
-    auto iter = _requestDoneFunections.find(requestName);
-    assert(iter == _requestDoneFunections.end());
-    if(iter == _requestDoneFunections.end())
-        _requestDoneFunections.emplace(requestName, func);
+    auto iter = _requestDoneFunctions.find(requestName);
+    assert(iter == _requestDoneFunctions.end());
+    if(iter == _requestDoneFunctions.end())
+        _requestDoneFunctions.emplace(requestName, func);
 }
 
-bool HttpClientUser::get(const std::string& requestName, const std::string& url)
+void HttpClientUser::get(const std::string& requestName, const std::string& url)
 {
     _requestName = requestName;
-    return _client.get(url);
+    if (!_client.get(url))
+        requestFailed();
 }
 
-bool HttpClientUser::post(const std::string& requestName, const std::string& url, const Http::Message& message)
+void HttpClientUser::post(const std::string& requestName, const std::string& url, const Http::Message& message)
 {
     _requestName = requestName;
-    return _client.post(url, message);
+    if (!_client.post(url, message))
+        requestFailed();
+}
+
+void HttpClientUser::requestFailed()
+{
+    ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
 }
 
 void HttpClientUser::requestDone(AsioWrapper::error_code errorCode, const Http::Message& message)
 {
-    auto iter = _requestDoneFunections.find(_requestName);
-    assert(iter != _requestDoneFunections.end());
-    if (iter != _requestDoneFunections.end())
+    auto iter = _requestDoneFunctions.find(_requestName);
+    assert(iter != _requestDoneFunctions.end());
+    if (iter != _requestDoneFunctions.end())
         (iter->second)(errorCode, message);
 }

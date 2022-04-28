@@ -11,9 +11,9 @@ public:
     Application(const Wt::WEnvironment& env);
 
 private:
-    void projectRequestDone(Wt::AsioWrapper::error_code errotCode, const Wt::Http::Message& message);
+    void projectRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message);
 
-    void projectSubEntitiesRequestDone(Wt::AsioWrapper::error_code errotCode, const Wt::Http::Message& message);
+    void projectSubEntitiesRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message);
 };
 
 #endif //_APPLICATION_H_
