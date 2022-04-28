@@ -1,8 +1,10 @@
 #include "Application.h"
 
 #include <nlohmann/json.hpp>
+#include <Wt/WEnvironment.h>
 #include <Wt/WText.h>
 
+#include "UrlBuilder.h"
 #include "ConnectionInformationWidget.h"
 
 using namespace nlohmann;
@@ -18,7 +20,7 @@ Application::Application(const WEnvironment& env) :
     registerRequestDoneFunction("project", std::bind(&Application::projectRequestDone, this, std::placeholders::_1, std::placeholders::_2));
     registerRequestDoneFunction("projectSubEntities", std::bind(&Application::projectSubEntitiesRequestDone, this, std::placeholders::_1, std::placeholders::_2));
 
-    get("project", "http://127.0.0.1:8081/project");
+    get("project", UrlBuilder::instance()->projectUrl());
 }
 
 void Application::projectRequestDone(AsioWrapper::error_code errotCode, const Http::Message& message)
@@ -26,8 +28,10 @@ void Application::projectRequestDone(AsioWrapper::error_code errotCode, const Ht
     root()->addWidget(std::make_unique<Wt::WText>(message.body()));
     
     auto json = json::parse(message.body());
-
-    get("projectSubEntities", std::string("http://127.0.0.1:8081/subEntities/") + json["id"].get<std::string>());
+    auto id = json["id"].get<std::string>();
+    auto url = UrlBuilder::instance()->subEntitiesUrl(id);
+    wApp->log(url);
+    get("projectSubEntities", url);
 }
 
 void Application::projectSubEntitiesRequestDone(AsioWrapper::error_code errotCode, const Http::Message& message)
