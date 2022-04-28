@@ -9,7 +9,7 @@
 
 using namespace Wt;
 
-ConnectionInformationWidget::ConnectionInformationWidget() :
+ConnectionInformationWidget::ConnectionInformationWidget(const Uuid& id) :
     WGroupBox()
 {
     setTitle(u8"Доступ к контроллеру:");

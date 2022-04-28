@@ -16,8 +16,6 @@ Application::Application(const WEnvironment& env) :
 {
     setTitle(u8"Онлайн Конфигуратор");
 
-    //root()->addWidget(std::make_unique<ConnectionInformationWidget>());
-
     registerRequestDoneFunction("project", std::bind(&Application::projectRequestDone, this, std::placeholders::_1, std::placeholders::_2));
     registerRequestDoneFunction("projectSubEntities", std::bind(&Application::projectSubEntitiesRequestDone, this, std::placeholders::_1, std::placeholders::_2));
 
@@ -32,7 +30,7 @@ void Application::projectRequestDone(AsioWrapper::error_code errorCode, const Ht
         return;
     }
 
-    root()->addWidget(std::make_unique<Wt::WText>(message.body()));
+    //root()->addWidget(std::make_unique<Wt::WText>(message.body()));
     
     auto json = json::parse(message.body());
     auto id = json["id"].get<std::string>();
@@ -49,5 +47,16 @@ void Application::projectSubEntitiesRequestDone(AsioWrapper::error_code errorCod
         return;
     }
 
-    root()->addWidget(std::make_unique<Wt::WText>(message.body()));   
+    //root()->addWidget(std::make_unique<Wt::WText>(message.body()));   
+
+    auto json = json::parse(message.body());
+    for (auto iter = json.begin(); iter != json.end(); ++iter)
+    {
+        auto subEntityJson = *iter;
+        if (subEntityJson["name"].get<std::string>() == "connectionInformation")
+        {
+            auto id = Uuid(subEntityJson["id"].get<std::string>());
+            root()->addWidget(std::make_unique<ConnectionInformationWidget>(id));
+        }
+    }
 }
