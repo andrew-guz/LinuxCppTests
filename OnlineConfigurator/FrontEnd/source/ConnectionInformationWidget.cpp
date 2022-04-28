@@ -1,12 +1,16 @@
 #include "ConnectionInformationWidget.h"
 
+#include <nlohmann/json.hpp>
 #include <Wt/WGridLayout.h>
 #include <Wt/WText.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
 
-#include "WaitingWindow.h"
+#include "UrlBuilder.h"
+#include "ApplicationErrorNotifier.h"
+#include "EntitySerializerFactory.h"
 
+using namespace nlohmann;
 using namespace Wt;
 
 ConnectionInformationWidget::ConnectionInformationWidget(const Uuid& id) :
@@ -25,9 +29,33 @@ ConnectionInformationWidget::ConnectionInformationWidget(const Uuid& id) :
     _gridLayout->addWidget(std::make_unique<WText>(u8"Пароль:"), 2, 0);
     _password = _gridLayout->addWidget(std::make_unique<WLineEdit>(), 2, 1);
     _password->setEchoMode(EchoMode::Password);
+
+    registerRequestDoneFunction("data", std::bind(&ConnectionInformationWidget::dataRequestDone, this, std::placeholders::_1, std::placeholders::_2));
+
+    get("data", UrlBuilder::instance()->entityUrl(_id));
 }
 
 ConnectionInformationWidget::~ConnectionInformationWidget()
 {
 
+}
+
+void ConnectionInformationWidget::dataRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message)
+{
+    if (errorCode.failed())
+    {
+        ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
+        return;
+    }
+
+    auto json = json::parse(message.body());
+    auto serializer = EntitySerializerFactory::instance()->getSerializer("connectionInformation");
+    auto entity = serializer->toEntity(json);
+    if (_entity)
+        delete _entity;
+    _entity = entity;
+
+    _mainAddress->setText(_entity->property("mainAddress").data().toString());
+    _additionalAddress->setText(_entity->property("additionalAddress").data().toString());
+    _password->setText(_entity->property("password").data().toString());
 }

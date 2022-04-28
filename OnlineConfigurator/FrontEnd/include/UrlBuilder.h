@@ -17,6 +17,10 @@ public:
 
     std::string subEntitiesUrl(const std::string& id) const;
 
+    std::string entityUrl(const Uuid& id) const;
+
+    std::string entityUrl(const std::string& id) const;
+
 private:
     int             _port = -1;
     mutable char    _buffer[1000];

@@ -3,9 +3,12 @@
 
 #include <Wt/WGroupBox.h>
 
+#include "HttpClientUser.h"
 #include "Uuid.h"
 
-class ConnectionInformationWidget final : public Wt::WGroupBox
+class IEntity;
+
+class ConnectionInformationWidget final : public Wt::WGroupBox, public HttpClientUser
 {
 public:
     ConnectionInformationWidget(const Uuid& id);
@@ -13,7 +16,11 @@ public:
     virtual ~ConnectionInformationWidget();
 
 private:
+    void dataRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message);
+
+private:
     Uuid                _id;
+    IEntity*            _entity;
     Wt::WGridLayout*    _gridLayout = nullptr;
     Wt::WLineEdit*      _mainAddress = nullptr;
     Wt::WLineEdit*      _additionalAddress = nullptr;

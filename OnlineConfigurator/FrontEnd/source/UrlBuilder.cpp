@@ -21,3 +21,14 @@ std::string UrlBuilder::subEntitiesUrl(const std::string& id) const
     std::snprintf(_buffer, 1000, "http://127.0.0.1:%i/subEntities/%s", _port, id.c_str());
     return _buffer;
 }
+
+std::string UrlBuilder::entityUrl(const Uuid& id) const
+{
+    return entityUrl(id.data());
+}
+
+std::string UrlBuilder::entityUrl(const std::string& id) const
+{
+    std::snprintf(_buffer, 1000, "http://127.0.0.1:%i/entity/%s", _port, id.c_str());
+    return _buffer;
+}
