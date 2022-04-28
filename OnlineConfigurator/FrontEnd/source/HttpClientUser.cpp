@@ -3,7 +3,6 @@
 #include <cassert>
 
 using namespace Wt;
-using namespace Wt::Http;
 
 HttpClientUser::HttpClientUser()
 {
@@ -24,13 +23,13 @@ bool HttpClientUser::get(const std::string& requestName, const std::string& url)
     return _client.get(url);
 }
 
-bool HttpClientUser::post(const std::string& requestName, const std::string& url, const Wt::Http::Message& message)
+bool HttpClientUser::post(const std::string& requestName, const std::string& url, const Http::Message& message)
 {
     _requestName = requestName;
     return _client.post(url, message);
 }
 
-void HttpClientUser::requestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message)
+void HttpClientUser::requestDone(AsioWrapper::error_code errorCode, const Http::Message& message)
 {
     auto iter = _requestDoneFunections.find(_requestName);
     assert(iter != _requestDoneFunections.end());

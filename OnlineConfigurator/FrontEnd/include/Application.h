@@ -13,7 +13,7 @@ public:
 private:
     void projectRequestDone(Wt::AsioWrapper::error_code errotCode, const Wt::Http::Message& message);
 
-private:
+    void projectSubEntitiesRequestDone(Wt::AsioWrapper::error_code errotCode, const Wt::Http::Message& message);
 };
 
 #endif //_APPLICATION_H_
