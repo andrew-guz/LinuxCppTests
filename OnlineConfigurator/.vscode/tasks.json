@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "cmake . && make",
+            "command": "cmake . && make -j4",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
