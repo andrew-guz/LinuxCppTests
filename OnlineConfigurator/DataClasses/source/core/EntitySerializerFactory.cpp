@@ -8,6 +8,8 @@ EntitySerializerFactory::EntitySerializerFactory()
 {
     registerSerializer("connectionInformation", std::make_shared<EntitySerializer>());
     registerSerializer("project",               std::make_shared<EntitySerializer>());
+    registerSerializer("voltageLimits",         std::make_shared<EntitySerializer>());
+    registerSerializer("errorProcessing",       std::make_shared<EntitySerializer>());
 }
 
 std::shared_ptr<ISerializer> EntitySerializerFactory::getSerializer(const std::string& type)
