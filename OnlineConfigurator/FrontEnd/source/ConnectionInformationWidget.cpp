@@ -5,6 +5,7 @@
 #include "WtGlobal.h"
 #include "UrlBuilder.h"
 #include "ApplicationErrorNotifier.h"
+#include "EntitySerializerFactory.h"
 
 using namespace nlohmann;
 using namespace Wt;
@@ -46,8 +47,9 @@ void ConnectionInformationWidget::dataRequestDone(Wt::AsioWrapper::error_code er
     }
 
     auto json = json::parse(message.body());
+    auto entity = EntitySerializerFactory::instance()->getSerializer("connectionInformation")->toEntitySharedPtr(json);
     
-    /*_mainAddress->setText(_entity ? _entity->propertyValue("mainAddress").toString() : "");
-    _additionalAddress->setText(_entity ? _entity->propertyValue("additionalAddress").toString() : "");
-    _password->setText(_entity ? _entity->propertyValue("password").toString() : "");*/
+    _mainAddress->setText(entity ? entity->propertyValue("mainAddress").toString() : "");
+    _additionalAddress->setText(entity ? entity->propertyValue("additionalAddress").toString() : "");
+    _password->setText(entity ? entity->propertyValue("password").toString() : "");
 }
