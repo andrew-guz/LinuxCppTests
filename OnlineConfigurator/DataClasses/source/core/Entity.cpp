@@ -83,6 +83,11 @@ const Property& Entity::property(const std::string& name) const
     return search(_properties, name);
 }
 
+const Variant& Entity::propertyValue(const std::string& name) const
+{
+    return search(_properties, name).data();
+}
+
 std::vector<std::string> Entity::listSubEntityNames() const
 {
     return list(_subEntities);

@@ -28,6 +28,8 @@ public:
 
     virtual const Property& property(const std::string& name) const override final;
 
+    virtual const Variant& propertyValue(const std::string& name) const override final;
+
     virtual std::vector<std::string> listSubEntityNames() const override final;
 
     virtual bool hasSubEntity(const std::string& name) const override final;

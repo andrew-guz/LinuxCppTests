@@ -19,6 +19,9 @@ private:
     void dataRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message);
 
 private:
+    void clearEntity();
+
+private:
     Uuid                _id;
     IEntity*            _entity;
     Wt::WGridLayout*    _gridLayout = nullptr;

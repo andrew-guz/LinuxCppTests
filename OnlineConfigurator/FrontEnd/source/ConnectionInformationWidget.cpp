@@ -35,11 +35,7 @@ ConnectionInformationWidget::ConnectionInformationWidget(const Uuid& id) :
 
 ConnectionInformationWidget::~ConnectionInformationWidget()
 {
-    if (_entity)
-    {
-        delete _entity;
-        _entity = nullptr;
-    }
+    clearEntity();
 }
 
 void ConnectionInformationWidget::dataRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message)
@@ -50,14 +46,19 @@ void ConnectionInformationWidget::dataRequestDone(Wt::AsioWrapper::error_code er
         return;
     }
 
+    clearEntity();
+
     auto json = json::parse(message.body());
     auto serializer = EntitySerializerFactory::instance()->getSerializer("connectionInformation");
-    auto entity = serializer->toEntity(json);
-    if (_entity)
-        delete _entity;
-    _entity = entity;
+    _entity = serializer->toEntity(json);
 
-    _mainAddress->setText(_entity->property("mainAddress").data().toString());
-    _additionalAddress->setText(_entity->property("additionalAddress").data().toString());
-    _password->setText(_entity->property("password").data().toString());
+    _mainAddress->setText(_entity ? _entity->propertyValue("mainAddress").toString() : "");
+    _additionalAddress->setText(_entity ? _entity->propertyValue("additionalAddress").toString() : "");
+    _password->setText(_entity ? _entity->propertyValue("password").toString() : "");
+}
+
+void ConnectionInformationWidget::clearEntity()
+{
+    delete _entity;
+    _entity = nullptr;
 }
