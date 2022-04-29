@@ -10,3 +10,7 @@ Later:
 + switch on or off entity pool usage and serializer maybe return shared_pointer
 + add waiting window (+counter in it)
 - more fields from original application in Project
+- field update logic
+- open project
+- save project
+- crc?
