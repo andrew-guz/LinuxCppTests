@@ -16,7 +16,6 @@ nlohmann::json EntitySerializer::toJson(const IEntity* entity, bool withSubEntit
         const auto& property = entity->property(propertyName);
         auto jsonProperty = nlohmann::json::object();
         jsonProperty["name"] = property.name();
-        jsonProperty["displayName"] = property.displayName();
         jsonProperty["data"] = VariantSerializer::toJson(property.data());
         jsonProperties.push_back(jsonProperty);
     }

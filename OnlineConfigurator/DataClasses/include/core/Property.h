@@ -4,11 +4,12 @@
 #include <string>
 
 #include "Variant.h"
+#include "PropertyEditorInfo.h"
 
 class Property final
 {
 public:
-    Property(const std::string& name, const std::string& displayName, const Variant& data = {});
+    Property(const std::string& name, const std::string& displayName, const Variant& data = {}, const PropertyAdditions::PropertyEditorInfo& editorInfo = {});
 
     Property(const Property& property);
 
@@ -28,10 +29,13 @@ public:
 
     const Variant& data() const;
 
+    const PropertyAdditions::PropertyEditorInfo& editorInfo() const;
+
 private:
-    std::string _name;
-    std::string _displayName;
-    Variant     _data;
+    std::string                             _name;
+    std::string                             _displayName;
+    Variant                                 _data;
+    PropertyAdditions::PropertyEditorInfo   _editorInfo;
 };
 
 #endif //_PROPERTY_H_

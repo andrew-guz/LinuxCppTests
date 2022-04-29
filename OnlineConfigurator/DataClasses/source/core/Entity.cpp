@@ -108,7 +108,7 @@ const IEntity* Entity::subEntity(const std::string& name) const
     return search(_subEntities, name);
 }
 
-void Entity::addProperty(const std::string& name, const std::string& displayName, const Variant& data)
+void Entity::addProperty(const std::string& name, const std::string& displayName, const Variant& data, const PropertyAdditions::PropertyEditorInfo& editorInfo)
 {
-    _properties.emplace(name, Property(name, displayName, data));
+    _properties.emplace(name, Property(name, displayName, data, editorInfo));
 }

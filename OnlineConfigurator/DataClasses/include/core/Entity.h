@@ -4,8 +4,7 @@
 #include <map>
 
 #include "IEntity.h"
-
-#define SET_TYPE(TYPE) static const std::string _type = TYPE;
+#include "PropertyEditorInfo.h"
 
 class Entity : public IEntity
 {
@@ -39,7 +38,7 @@ public:
     virtual const IEntity* subEntity(const std::string& name) const override final;
 
 protected:
-    void addProperty(const std::string& name, const std::string& displayName, const Variant& data = {});
+    void addProperty(const std::string& name, const std::string& displayName, const Variant& data = {}, const PropertyAdditions::PropertyEditorInfo& editorInfo = {});
 
     template<typename T>
     void addSubEntity(const std::string& name)
