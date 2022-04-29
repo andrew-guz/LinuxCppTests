@@ -1,9 +1,8 @@
 #include "Application.h"
 
 #include <nlohmann/json.hpp>
-#include <Wt/WEnvironment.h>
-#include <Wt/WText.h>
 
+#include "WtGlobal.h"
 #include "UrlBuilder.h"
 #include "ApplicationErrorNotifier.h"
 #include "ConnectionInformationWidget.h"

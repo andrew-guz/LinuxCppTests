@@ -4,4 +4,7 @@ Problem: wrong id for Connection Information:
 - FrontEnd - empty message may be an error
 + verify Uuid copy operation
 
-Later: more fields from original application in Project
+Later:
+- entity pool - double call in front end
+- add waiting window (+counter in it)
+- more fields from original application in Project

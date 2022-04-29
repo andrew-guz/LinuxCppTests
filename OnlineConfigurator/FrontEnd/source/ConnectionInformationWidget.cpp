@@ -1,11 +1,8 @@
 #include "ConnectionInformationWidget.h"
 
 #include <nlohmann/json.hpp>
-#include <Wt/WGridLayout.h>
-#include <Wt/WText.h>
-#include <Wt/WLineEdit.h>
-#include <Wt/WPushButton.h>
 
+#include "WtGlobal.h"
 #include "UrlBuilder.h"
 #include "ApplicationErrorNotifier.h"
 #include "EntitySerializerFactory.h"
@@ -14,11 +11,12 @@ using namespace nlohmann;
 using namespace Wt;
 
 ConnectionInformationWidget::ConnectionInformationWidget(const Uuid& id) :
-    WGroupBox()
+    WGroupBox(),
+    _id(id)
 {
     setTitle(u8"Доступ к контроллеру:");
 
-    resize(500, 200);
+    resize(400, 150);
 
     _gridLayout = (WGridLayout*)setLayout(std::make_unique<WGridLayout>());
 
