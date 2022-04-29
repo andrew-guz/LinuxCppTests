@@ -24,7 +24,9 @@ void PropertyResource::callbackGet(const std::shared_ptr<restbed::Session> sessi
         {
             const auto& property = entity->property(request->get_path_parameter("propertyName"));
             auto jsonObject = VariantSerializer::toJson(property.data());
-            session->close(restbed::OK, jsonObject.dump(4));
+            auto str = jsonObject.dump(4);
+            std::cout << "PropertyResource GET: " << str << std::endl;
+            session->close(restbed::OK, str);
             return;
         }
     }

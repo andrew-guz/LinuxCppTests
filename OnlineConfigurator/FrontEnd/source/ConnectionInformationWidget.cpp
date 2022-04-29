@@ -37,7 +37,11 @@ ConnectionInformationWidget::ConnectionInformationWidget(const Uuid& id) :
 
 ConnectionInformationWidget::~ConnectionInformationWidget()
 {
-
+    if (_entity)
+    {
+        delete _entity;
+        _entity = nullptr;
+    }
 }
 
 void ConnectionInformationWidget::dataRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message)

@@ -14,5 +14,7 @@ void ProjectResource::callbackGet(const std::shared_ptr<restbed::Session> sessio
     std::cout << "ProjectResource GET: " << session->get_request()->get_path() << std::endl;
     auto jsonObject = nlohmann::json::object();
     jsonObject["id"] = _project.id().data();
-    session->close(restbed::OK, jsonObject.dump(4));
+    auto str = jsonObject.dump(4);
+    std::cout << "ProjectResource GET: " << str << std::endl;
+    session->close(restbed::OK, str);
 }

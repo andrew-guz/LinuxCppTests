@@ -29,8 +29,6 @@ void Application::projectRequestDone(AsioWrapper::error_code errorCode, const Ht
         ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
         return;
     }
-
-    //root()->addWidget(std::make_unique<Wt::WText>(message.body()));
     
     auto json = json::parse(message.body());
     auto id = json["id"].get<std::string>();
@@ -46,8 +44,6 @@ void Application::projectSubEntitiesRequestDone(AsioWrapper::error_code errorCod
         ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
         return;
     }
-
-    //root()->addWidget(std::make_unique<Wt::WText>(message.body()));   
 
     auto json = json::parse(message.body());
     for (auto iter = json.begin(); iter != json.end(); ++iter)

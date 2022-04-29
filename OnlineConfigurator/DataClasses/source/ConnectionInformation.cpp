@@ -9,4 +9,7 @@ ConnectionInformation::ConnectionInformation(bool withSubEntities, const Uuid& i
     addProperty("password", u8"Пароль", std::string());
     
     //fill subEntities
+
+    //some presetup values
+    property("mainAddress") = std::string("192.168.3.");
 }
