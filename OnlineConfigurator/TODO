@@ -12,6 +12,7 @@ Later:
 + more fields from original application in Project
 -+ automate adding new data types to factory
 - generate UI from fields (at least partially)
+- erorr in generate UI from fields - order of fields
 - field update logic
 - open project
 - save project
