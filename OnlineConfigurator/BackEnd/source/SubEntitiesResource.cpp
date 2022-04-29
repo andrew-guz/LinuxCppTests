@@ -25,9 +25,9 @@ void SubEntitiesResource::callbackGet(const std::shared_ptr<restbed::Session> se
             jsonObject["id"] = entity->subEntity(subEntityName)->id().data();
             jsonArray.push_back(jsonObject);
         }
-        auto str = jsonArray.dump(4);
-        std::cout << "SubEntitiesResource GET: " << str << std::endl;
-        session->close(restbed::OK, str);
+        auto jsonObjectString = jsonArray.dump(4);
+        std::cout << "SubEntitiesResource GET: " << jsonObjectString << std::endl;
+        session->close(restbed::OK, jsonObjectString);
         return;
     }
     session->close(restbed::BAD_REQUEST);

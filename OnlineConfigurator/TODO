@@ -1,6 +1,6 @@
 Problem: wrong id for Connection Information:
-- Print Project when BackEnd starts
-- BackEnd Resources - check return result - no entity - bad request
++ Print Project when BackEnd starts
++ BackEnd Resources - check return result - no entity - bad request
 - FrontEnd - empty message may be an error
 + verify Uuid copy operation
 

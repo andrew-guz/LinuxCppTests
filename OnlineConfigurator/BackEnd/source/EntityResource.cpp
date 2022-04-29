@@ -19,9 +19,9 @@ void EntityResource::callbackGet(const std::shared_ptr<restbed::Session> session
     {
         auto serializer = EntitySerializerFactory::instance()->getSerializer(entity->type());
         auto jsonObject = serializer->toJson(entity, false);
-        auto str = jsonObject.dump(4);
-        std::cout << "EntityResource GET: " << str << std::endl;
-        session->close(restbed::OK, str);
+        auto jsonObjectString = jsonObject.dump(4);
+        std::cout << "EntityResource GET: " << jsonObjectString << std::endl;
+        session->close(restbed::OK, jsonObjectString);
         return;
     }
     session->close(restbed::BAD_REQUEST);

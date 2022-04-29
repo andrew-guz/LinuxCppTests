@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Project.h"
+#include "EntitySerializerFactory.h"
 #include "ProjectResource.h"
 #include "EntityResource.h"
 #include "SubEntitiesResource.h"
@@ -22,6 +23,7 @@ int main(int argc, char* argv[])
     }   
 
     Project project;
+    std::cout << "Project:" << std::endl << EntitySerializerFactory::instance()->getSerializer(project.type())->toJson(&project, true).dump(4) << std::endl;
 
     auto settings = std::make_shared<restbed::Settings>();
     settings->set_port(port);
