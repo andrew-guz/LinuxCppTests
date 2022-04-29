@@ -73,6 +73,8 @@
         "bitset": "cpp",
         "list": "cpp",
         "sstream": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "typeindex": "cpp",
+        "cassert": "cpp"
     }
 }

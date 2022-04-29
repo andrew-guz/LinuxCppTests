@@ -13,7 +13,7 @@ Later:
 -+ automate adding new data types to factory
 + save order of properties as they were added
 - generate UI from fields (at least partially)
-- erorr in generate UI from fields - order of fields
+- error in generate UI from fields - order of fields
 - field update logic
 - open project
 - save project

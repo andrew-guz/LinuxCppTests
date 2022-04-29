@@ -8,7 +8,9 @@
 #include <Wt/WMessageBox.h>
 #include <Wt/WProgressBar.h>
 #include <Wt/WPushButton.h>
+#include <Wt/WSpinBox.h>
 #include <Wt/WText.h>
+#include <Wt/WWidget.h>
 
 #define LOG wApp->log("[DEBUG]")
 
