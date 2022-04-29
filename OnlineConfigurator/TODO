@@ -10,7 +10,7 @@ Later:
 + switch on or off entity pool usage and serializer maybe return shared_pointer
 + add waiting window (+counter in it)
 + more fields from original application in Project
-- automate adding new data types to factory
+-+ automate adding new data types to factory
 - generate UI from fields (at least partially)
 - field update logic
 - open project

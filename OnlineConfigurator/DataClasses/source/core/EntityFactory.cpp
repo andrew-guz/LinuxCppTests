@@ -19,7 +19,9 @@ Entity* EntityFactory::createEntity(const std::string& type, bool withSubEntitie
 {
     auto iter = _creators.find(type);
     assert(iter != _creators.end());
-    return (iter->second)(withSubEntities, id);
+    if (iter != _creators.end())
+        return (iter->second)(withSubEntities, id);
+    return nullptr;
 }
 
 void EntityFactory::registerCreationFunction(const std::string& type, EntityCreationFunction function)

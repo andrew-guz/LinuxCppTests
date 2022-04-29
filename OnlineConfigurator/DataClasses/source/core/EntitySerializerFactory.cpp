@@ -6,17 +6,16 @@
 
 EntitySerializerFactory::EntitySerializerFactory()
 {
-    registerSerializer("connectionInformation", std::make_shared<EntitySerializer>());
-    registerSerializer("project",               std::make_shared<EntitySerializer>());
-    registerSerializer("voltageLimits",         std::make_shared<EntitySerializer>());
-    registerSerializer("errorProcessing",       std::make_shared<EntitySerializer>());
+    //register here not standart serializers
 }
 
 std::shared_ptr<ISerializer> EntitySerializerFactory::getSerializer(const std::string& type)
 {
     auto iter = _serializers.find(type);
-    assert(iter != _serializers.end());
-    return iter->second;
+    //do not blame for unknown type - return EntitySerializer - that will help to register only specific entities
+    if (iter != _serializers.end())
+        return iter->second;
+    return std::make_shared<EntitySerializer>();
 }
 
 void EntitySerializerFactory::registerSerializer(const std::string& type, std::shared_ptr<ISerializer> serializer)
