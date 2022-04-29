@@ -10,7 +10,6 @@ Property::Property(const std::string& name, const std::string& displayName, cons
     _editorInfo(editorInfo)
 {
     assert(name.size());
-    assert(displayName.size());
 }
 
 Property::Property(const Property& property) :
