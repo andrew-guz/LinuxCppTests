@@ -5,7 +5,8 @@
 + verify Uuid copy operation
 
 Later:
-+ entity pool - double call in front end
 + get property value easier
+- entity pool - double call in front end
+- switch on or off entity pool usage via Entity ctor and serializer and maybe return shared_pointer
 - add waiting window (+counter in it)
 - more fields from original application in Project

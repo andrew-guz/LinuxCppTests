@@ -29,8 +29,11 @@ public:
         return dynamic_cast<T*>(find(id));
     }
 
+    void disable();
+
 private:
-    std::map<Uuid, IEntity*> _entities;
+    std::map<Uuid, IEntity*>    _entities;
+    bool                        _disabled = false;
 };
 
 #endif //_ENTITYPOOL_H_

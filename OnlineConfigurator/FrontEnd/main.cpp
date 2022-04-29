@@ -1,5 +1,6 @@
 #include "UrlBuilder.h"
 #include "Application.h"
+#include "EntityPool.h"
 
 int main(int argc, char* argv[])
 {
@@ -11,6 +12,8 @@ int main(int argc, char* argv[])
             break;
         }
     }
+
+    EntityPool::instance()->disable();
 
     return Wt::WRun(argc, argv, [](const Wt::WEnvironment& env)
     {

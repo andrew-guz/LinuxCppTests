@@ -10,4 +10,6 @@
 #include <Wt/WPushButton.h>
 #include <Wt/WText.h>
 
+#define LOG wApp->log("[DEBUG]")
+
 #endif //_WTGLOBAL_H_
