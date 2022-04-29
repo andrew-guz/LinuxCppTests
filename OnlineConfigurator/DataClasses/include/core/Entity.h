@@ -1,6 +1,7 @@
 #ifndef _ENTITY_H_
 #define _ENTITY_H_
 
+#include <vector>
 #include <map>
 
 #include "IEntity.h"
@@ -51,7 +52,7 @@ private:
     const std::string               _type;
     bool                            _withSubEntities;
     Uuid                            _id;
-    std::map<std::string, Property> _properties;
+    std::vector<Property>           _properties;
     std::map<std::string, IEntity*> _subEntities;
 
 private:
