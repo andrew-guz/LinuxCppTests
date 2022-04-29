@@ -15,11 +15,12 @@ public:
 
     void show(const std::string& text = {});
 
-    void close();
+    void hide();
 
 private:
     Wt::WDialog*    _dialog = nullptr;
     Wt::WTimer*     _timer = nullptr;
+    int             _counter = 0;
 };
 
 #endif //_WIATINGWINDOW_H_

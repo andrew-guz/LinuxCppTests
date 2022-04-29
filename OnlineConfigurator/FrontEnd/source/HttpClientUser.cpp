@@ -2,6 +2,7 @@
 
 #include <cassert>
 
+#include "WaitingWindow.h"
 #include "ApplicationErrorNotifier.h"
 
 using namespace Wt;
@@ -22,14 +23,18 @@ void HttpClientUser::registerRequestDoneFunction(const std::string& requestName,
 void HttpClientUser::get(const std::string& requestName, const std::string& url)
 {
     _requestName = requestName;
-    if (!_client.get(url))
+    if (_client.get(url))
+        WaitingWindow::instance()->show();
+    else
         requestFailed();
 }
 
 void HttpClientUser::post(const std::string& requestName, const std::string& url, const Http::Message& message)
 {
     _requestName = requestName;
-    if (!_client.post(url, message))
+    if (_client.post(url, message))
+        WaitingWindow::instance()->show();
+    else
         requestFailed();
 }
 
@@ -40,6 +45,7 @@ void HttpClientUser::requestFailed()
 
 void HttpClientUser::requestDone(AsioWrapper::error_code errorCode, const Http::Message& message)
 {
+    WaitingWindow::instance()->hide();
     auto iter = _requestDoneFunctions.find(_requestName);
     assert(iter != _requestDoneFunctions.end());
     if (iter != _requestDoneFunctions.end())

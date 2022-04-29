@@ -8,6 +8,10 @@ using namespace Wt;
 
 void WaitingWindow::show(const std::string& text)
 {
+    ++_counter;
+    if (_counter > 1)
+        return;
+
     _dialog = wApp->root()->addChild(std::make_unique<WDialog>(u8"Подождите пожалуйста"));
     if (text.size())
     {
@@ -32,10 +36,14 @@ void WaitingWindow::show(const std::string& text)
     _dialog->show();
 }
 
-void WaitingWindow::close()
+void WaitingWindow::hide()
 {
+    --_counter;
+    if (_counter > 0)
+        return;
+
     _timer->stop();
     _timer = nullptr;
-    wApp->removeChild(_dialog);
+    wApp->root()->removeChild(_dialog);
     _dialog = nullptr;
 }

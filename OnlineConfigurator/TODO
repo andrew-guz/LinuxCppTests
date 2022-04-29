@@ -8,5 +8,5 @@ Later:
 + get property value easier
 + entity pool - double call in front end - allow disable
 + switch on or off entity pool usage and serializer maybe return shared_pointer
-- add waiting window (+counter in it)
++ add waiting window (+counter in it)
 - more fields from original application in Project
