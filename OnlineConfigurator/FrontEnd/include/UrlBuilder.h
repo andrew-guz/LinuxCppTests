@@ -21,6 +21,8 @@ public:
 
     std::string entityUrl(const std::string& id) const;
 
+    std::string propertyUrl(const Uuid& id, const std::string& propertyName) const;
+
     std::string propertyUrl(const std::string& id, const std::string& propertyName) const;
 
 private:

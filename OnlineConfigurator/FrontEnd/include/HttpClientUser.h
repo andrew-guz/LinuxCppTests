@@ -15,7 +15,6 @@ public:
 
     virtual ~HttpClientUser() = default;
 
-protected:
     void registerRequestDoneFunction(const std::string& requestName, RequestDoneFunction func);
 
     void get(const std::string& requestName, const std::string& url);

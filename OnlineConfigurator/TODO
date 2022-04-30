@@ -12,9 +12,13 @@ Later:
 + more fields from original application in Project
 -+ automate adding new data types to factory
 + save order of properties as they were added
-- generate UI from fields (at least partially)
-- error in generate UI from fields - order of fields
-- field update logic
++ generate UI from fields (at least partially)
++ error in generate UI from fields - order of fields
++ field update logic
+- less headers
 - open project
 - save project
 - crc?
+- validation?
+- ConnectionInformationWidget::dataRequestDone and ConnectionInformationWidget::updateRequestDone - common error check....
+- several classes with BuildUIHelper - separate common code
