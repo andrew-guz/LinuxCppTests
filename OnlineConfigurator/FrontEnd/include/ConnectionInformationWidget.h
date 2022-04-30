@@ -3,26 +3,14 @@
 
 #include <Wt/WGroupBox.h>
 
-#include "HttpClientUser.h"
-#include "Uuid.h"
+#include "EntityGridWidget.h"
 
-class IEntity;
-
-class ConnectionInformationWidget final : public Wt::WGroupBox, public HttpClientUser
+class ConnectionInformationWidget final : public Wt::WGroupBox, public EntityGridWidget
 {
 public:
     ConnectionInformationWidget(const Uuid& id);
 
-    virtual ~ConnectionInformationWidget();
-
-private:
-    void dataRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message);
-
-    void updateRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message);
-
-private:
-    Uuid                _id;
-    Wt::WGridLayout*    _gridLayout = nullptr;
+    virtual ~ConnectionInformationWidget() = default;
 };
 
 #endif //_CONNECTIONINFORMATIONWIDGET_H_
