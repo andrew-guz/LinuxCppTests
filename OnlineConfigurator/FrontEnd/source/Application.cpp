@@ -23,7 +23,8 @@ Application::Application(const WEnvironment& env) :
 
 void Application::projectRequestDone(AsioWrapper::error_code errorCode, const Http::Message& message)
 {
-    if (errorCode.failed())
+    if (errorCode.failed() ||
+        message.body().empty())
     {
         ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
         return;
@@ -38,7 +39,8 @@ void Application::projectRequestDone(AsioWrapper::error_code errorCode, const Ht
 
 void Application::projectSubEntitiesRequestDone(AsioWrapper::error_code errorCode, const Http::Message& message)
 {
-    if (errorCode.failed())
+    if (errorCode.failed() ||
+        message.body().empty())
     {
         ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
         return;

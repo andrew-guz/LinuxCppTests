@@ -40,7 +40,8 @@ ConnectionInformationWidget::~ConnectionInformationWidget()
 
 void ConnectionInformationWidget::dataRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message)
 {
-    if (errorCode.failed())
+    if (errorCode.failed() ||
+        message.body().empty())
     {
         ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
         return;
