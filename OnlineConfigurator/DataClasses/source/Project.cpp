@@ -8,7 +8,7 @@ Project::Project(bool withSubEntities, const Uuid& id) :
     Entity("project", withSubEntities, id)
 {
     //fill properties
-    addProperty("name", u8"Имя контроллера", std::string());
+    addProperty("name", u8"Имя контроллера", std::string(), { PropertyAdditions::EditorType::LineEdit, nullptr });
     
     //fill subEntities
     addSubEntity<ConnectionInformation>("connectionInformation");

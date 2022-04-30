@@ -5,7 +5,7 @@
 #include "WtGlobal.h"
 #include "UrlBuilder.h"
 #include "ApplicationErrorNotifier.h"
-#include "ConnectionInformationWidget.h"
+#include "EntityGroupBoxWidget.h"
 
 using namespace nlohmann;
 using namespace Wt;
@@ -50,10 +50,16 @@ void Application::projectSubEntitiesRequestDone(AsioWrapper::error_code errorCod
     for (auto iter = json.begin(); iter != json.end(); ++iter)
     {
         auto subEntityJson = *iter;
+        auto id = Uuid(subEntityJson["id"].get<std::string>());
         if (subEntityJson["name"].get<std::string>() == "connectionInformation")
         {
-            auto id = Uuid(subEntityJson["id"].get<std::string>());
-            root()->addWidget(std::make_unique<ConnectionInformationWidget>(id));
+            auto connectionInformationWidget = root()->addWidget(std::make_unique<EntityGroupBoxWidget>(u8"Доступ к контроллеру:", id));
+            connectionInformationWidget->resize(500, 150);
+        }
+        else if(subEntityJson["name"].get<std::string>() == "errorProcessing")
+        {
+            auto errorProcessingWidget = root()->addWidget(std::make_unique<EntityGroupBoxWidget>(u8"Обработка ошибок:", id));
+            errorProcessingWidget->resize(700, 200);
         }
     }
 }
