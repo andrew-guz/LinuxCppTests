@@ -5,6 +5,7 @@
 #include "WtGlobal.h"
 #include "UrlBuilder.h"
 #include "ApplicationErrorNotifier.h"
+#include "BuildUIHelper.h"
 #include "EntityGroupBoxWidget.h"
 
 using namespace nlohmann;
@@ -14,6 +15,8 @@ Application::Application(const WEnvironment& env) :
     WApplication(env)
 {
     setTitle(u8"Онлайн Конфигуратор");
+
+    _gridLayout = (WGridLayout*)root()->setLayout(std::make_unique<WGridLayout>());
 
     registerRequestDoneFunction("project", std::bind(&Application::projectRequestDone, this, std::placeholders::_1, std::placeholders::_2));
     registerRequestDoneFunction("projectSubEntities", std::bind(&Application::projectSubEntitiesRequestDone, this, std::placeholders::_1, std::placeholders::_2));
@@ -53,13 +56,13 @@ void Application::projectSubEntitiesRequestDone(AsioWrapper::error_code errorCod
         auto id = Uuid(subEntityJson["id"].get<std::string>());
         if (subEntityJson["name"].get<std::string>() == "connectionInformation")
         {
-            auto connectionInformationWidget = root()->addWidget(std::make_unique<EntityGroupBoxWidget>(u8"Доступ к контроллеру:", id));
-            connectionInformationWidget->resize(500, 150);
+            auto connectionInformationWidget = _gridLayout->addWidget(std::make_unique<EntityGroupBoxWidget>(u8"Доступ к контроллеру:", id), 1, 0, 1, 2);
+            connectionInformationWidget->resize(700, 150);
         }
         else if(subEntityJson["name"].get<std::string>() == "errorProcessing")
         {
-            auto errorProcessingWidget = root()->addWidget(std::make_unique<EntityGroupBoxWidget>(u8"Обработка ошибок:", id));
-            errorProcessingWidget->resize(700, 200);
+            auto errorProcessingWidget = _gridLayout->addWidget(std::make_unique<EntityGroupBoxWidget>(u8"Обработка ошибок:", id), 2, 1, 1, 1);
+            errorProcessingWidget->resize(500, 200);
         }
     }
 }

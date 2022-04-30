@@ -15,13 +15,30 @@ namespace Wt
     class WGridLayout;
 }
 
+struct GridPosition
+{
+    int _row;
+    int _column;
+    int _rowSpan;
+    int _columnSpan;
+};
+
+struct UpgradeHelpInfo
+{
+    Uuid                _entityId;
+    std::string         _requestName;
+     HttpClientUser*    _httpCLientUser;
+};
+
 class BuildUIHelper final
 {
 protected:
     BuildUIHelper() = default;
 
 public:
-    static Wt::WWidget* createWidget(Wt::WGridLayout* gridLayout, int row, const Property& property, const Uuid& entityId, const std::string& requestName, HttpClientUser* httpCLientUser);
+    static Wt::WWidget* createTextWidget(Wt::WGridLayout* gridLayout, const Property& property, const GridPosition& gridPosition);
+
+    static Wt::WWidget* createWidget(Wt::WGridLayout* gridLayout, const Property& property, const GridPosition& gridPosition, const UpgradeHelpInfo& upgradeHelpInfo);
 
     static std::map<std::string, Wt::WWidget*> fillGridLayout(Wt::WGridLayout* gridLayout, const IEntity* entity, const std::string& requestName, HttpClientUser* httpCLientUser);
 };
