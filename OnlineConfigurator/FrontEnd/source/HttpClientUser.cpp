@@ -29,10 +29,33 @@ void HttpClientUser::get(const std::string& requestName, const std::string& url)
         requestFailed();
 }
 
+void HttpClientUser::post(const std::string& requestName, const std::string& url, const std::string& body)
+{
+    Http::Message message;
+    message.addBodyText(body);
+    post(requestName, url, message);
+}
+
 void HttpClientUser::post(const std::string& requestName, const std::string& url, const Http::Message& message)
 {
     _requestName = requestName;
     if (_client.post(url, message))
+        WaitingWindow::instance()->show();
+    else
+        requestFailed();
+}
+
+void HttpClientUser::put(const std::string& requestName, const std::string& url, const std::string& body)
+{
+    Http::Message message;
+    message.addBodyText(body);
+    put(requestName, url, message);
+}
+
+void HttpClientUser::put(const std::string& requestName, const std::string& url, const Wt::Http::Message& message)
+{
+    _requestName = requestName;
+    if (_client.put(url, message))
         WaitingWindow::instance()->show();
     else
         requestFailed();

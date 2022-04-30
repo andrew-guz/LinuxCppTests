@@ -21,6 +21,8 @@ public:
 
     std::string entityUrl(const std::string& id) const;
 
+    std::string propertyUrl(const std::string& id, const std::string& propertyName) const;
+
 private:
     int             _port = -1;
     mutable char    _buffer[1000];

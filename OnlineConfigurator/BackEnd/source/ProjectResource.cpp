@@ -4,7 +4,7 @@
 #include <nlohmann/json.hpp>
 
 ProjectResource::ProjectResource(Project& project) :
-    BaseResource(project, "project", { true, false })
+    BaseResource(project, "project", { true, false, false, false })
 {
 
 }

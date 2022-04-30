@@ -8,7 +8,9 @@
 struct BaseResourceMethodsConfig
 {
     bool _get;
+    bool _post;
     bool _put;
+    bool _delete;
 };
 
 class BaseResource : public restbed::Resource
@@ -21,7 +23,11 @@ public:
 protected:
     virtual void callbackGet(const std::shared_ptr<restbed::Session> session) { }
 
+    virtual void callbackPost(const std::shared_ptr<restbed::Session> session) { }
+
     virtual void callbackPut(const std::shared_ptr<restbed::Session> session) { }
+
+    virtual void callbackDelete(const std::shared_ptr<restbed::Session> session) { }
 
 protected:
     Project& _project;

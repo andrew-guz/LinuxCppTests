@@ -20,7 +20,13 @@ protected:
 
     void get(const std::string& requestName, const std::string& url);
 
+    void post(const std::string& requestName, const std::string& url, const std::string& body);
+
     void post(const std::string& requestName, const std::string& url, const Wt::Http::Message& message);
+
+    void put(const std::string& requestName, const std::string& url, const std::string& body);
+
+    void put(const std::string& requestName, const std::string& url, const Wt::Http::Message& message);
 
 private:
     void requestFailed();

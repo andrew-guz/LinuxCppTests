@@ -6,7 +6,7 @@
 #include "VariantSerializer.h"
 
 PropertyResource::PropertyResource(Project& project) :
-    BaseResource(project, "property/{id: [0-9a-zA-Z-]{36}}/{propertyName: .*}", { true, true })
+    BaseResource(project, "property/{id: [0-9a-zA-Z-]{36}}/{propertyName: .*}", { true, false, true, false })
 {
 
 }

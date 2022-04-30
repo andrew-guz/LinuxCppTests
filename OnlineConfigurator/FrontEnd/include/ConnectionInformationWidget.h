@@ -18,6 +18,8 @@ public:
 private:
     void dataRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message);
 
+    void updateRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message& message);
+
 private:
     Uuid                _id;
     Wt::WGridLayout*    _gridLayout = nullptr;

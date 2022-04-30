@@ -6,6 +6,7 @@
 #include "UrlBuilder.h"
 #include "ApplicationErrorNotifier.h"
 #include "EntitySerializerFactory.h"
+#include "VariantSerializer.h"
 
 using namespace nlohmann;
 using namespace Wt;
@@ -28,7 +29,14 @@ ConnectionInformationWidget::ConnectionInformationWidget(const Uuid& id) :
     _password = _gridLayout->addWidget(std::make_unique<WLineEdit>(), 2, 1);
     _password->setEchoMode(EchoMode::Password);
 
+    _additionalAddress->changed().connect([this](){
+        auto url = UrlBuilder::instance()->propertyUrl(_id.data(), "additionalAddress");
+        Variant data = _additionalAddress->text().toUTF8();
+        this->put("updateField", url, VariantSerializer::toJson(data).dump(4));
+    });
+
     registerRequestDoneFunction("data", std::bind(&ConnectionInformationWidget::dataRequestDone, this, std::placeholders::_1, std::placeholders::_2));
+    registerRequestDoneFunction("updateField", std::bind(&ConnectionInformationWidget::updateRequestDone, this, std::placeholders::_1, std::placeholders::_2));
 
     get("data", UrlBuilder::instance()->entityUrl(_id));
 }
@@ -53,4 +61,13 @@ void ConnectionInformationWidget::dataRequestDone(Wt::AsioWrapper::error_code er
     _mainAddress->setText(entity ? entity->propertyValue("mainAddress").toString() : "");
     _additionalAddress->setText(entity ? entity->propertyValue("additionalAddress").toString() : "");
     _password->setText(entity ? entity->propertyValue("password").toString() : "");
+}
+
+void ConnectionInformationWidget::updateRequestDone(Wt::AsioWrapper::error_code errorCode, const Wt::Http::Message&)
+{
+    if (errorCode.failed())
+    {
+        ApplicationErrorNotifier::instance()->notify(u8"Ошибка сетевого взаимодействия");
+        return;
+    }
 }

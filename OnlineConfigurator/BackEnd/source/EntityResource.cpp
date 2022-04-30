@@ -6,7 +6,7 @@
 #include "EntitySerializerFactory.h"
 
 EntityResource::EntityResource(Project& project) :
-    BaseResource(project, "entity/{id: [0-9a-zA-Z-]{36}}", { true, false })
+    BaseResource(project, "entity/{id: [0-9a-zA-Z-]{36}}", { true, false, false, false })
 {
 
 }
