@@ -50,6 +50,7 @@ void PropertyResource::callbackPut(const std::shared_ptr<restbed::Session> sessi
                 auto propertyName = request->get_path_parameter("propertyName");
                 auto data = VariantSerializer::fromJson(jsonObject);
                 entity->property(propertyName) = data;
+                std::cout << "PropertyResource PUT: done" << std::endl;
                 session->close(restbed::OK);
             }
         }
