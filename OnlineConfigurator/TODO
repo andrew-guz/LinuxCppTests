@@ -22,3 +22,4 @@ Later:
 - validation?
 - ConnectionInformationWidget::dataRequestDone and ConnectionInformationWidget::updateRequestDone - common error check....
 - several classes with BuildUIHelper - separate common code
+- do not show waiting window too fast - wait for 0.5 seconds

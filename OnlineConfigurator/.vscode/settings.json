@@ -5,7 +5,8 @@
         "./DataClasses/include",
         "./DataClasses/include/core",
         "./BackEnd/include",
-        "./FrontEnd/include"
+        "./FrontEnd/include",
+        "./FrontEnd/include/core"
     ],
     "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {

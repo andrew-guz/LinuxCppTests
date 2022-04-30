@@ -1,6 +1,10 @@
 #minimum version
 cmake_minimum_required(VERSION 3.15)
 
+#build in Debug mode
+set(CMAKE_BUILD_TYPE Debug)
+
+#global project name
 project(OnlineConfigurator)
 
 #subprojects

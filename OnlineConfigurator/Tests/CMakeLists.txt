@@ -4,9 +4,6 @@ cmake_minimum_required(VERSION 3.15)
 # common variable for project name and executable name
 set(PROJECT_NAME "Tests")
 
-#build in Debug mode
-set(CMAKE_BUILD_TYPE Debug)
-
 #name of a project
 project(${PROJECT_NAME})
 
