@@ -1,0 +1,9 @@
+services:
+  cpp_web_service:
+    image: cpp_web_service_img:01
+    container_name: cpp_web_service
+    environment:
+      - PORT=15800
+    ports:
+      - "15800:15800"
+    restart: always
