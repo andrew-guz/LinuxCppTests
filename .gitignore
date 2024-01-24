@@ -43,3 +43,6 @@ CMakeCache.txt
 
 #logs
 *.log
+
+#qml staff
+.qtc_clangd/
