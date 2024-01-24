@@ -13,10 +13,10 @@ T sum(T arg, Args... args) {
 }
 
 /*
-  in sum<T> = a1 + sum<T>() T is already known.
-  for n1 it is double
-  for n2 it is int
-  int i = 0.5; i == 0
+in sum<T> = a1 + sum<T>() T is already known.
+for n1 it is double
+for n2 it is int
+int i = 0.5; i == 0
 */
 
 QUIZ(219)

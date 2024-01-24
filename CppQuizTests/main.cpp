@@ -2,6 +2,7 @@
 #include "Quiz38.h"
 #include "Quiz365.h"
 #include "Quiz219.h"
+#include "Quiz244.h"
 
 int main()
 {
