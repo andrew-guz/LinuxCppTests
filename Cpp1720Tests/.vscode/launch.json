@@ -8,7 +8,7 @@
             "name": "build & debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/Cpp20Tests",
+            "program": "${workspaceFolder}/bin/Cpp1720Tests",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
