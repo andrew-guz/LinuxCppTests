@@ -12,6 +12,16 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "run",
+            "type": "process",
+            "command": "./bin/Cpp1720Tests",
+            "group": {
+                "kind": "none",
+                "isDefault": true
+            },
+            "problemMatcher": []
         }
     ]
 }
