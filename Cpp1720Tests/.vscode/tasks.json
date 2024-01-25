@@ -16,7 +16,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "cmake . && make",
+            "command": "cmake . && make -j10 ",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
