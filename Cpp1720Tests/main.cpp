@@ -4,7 +4,9 @@
 
 int main()
 {
-    TestIfInit();
+    REGISTER_TEST(IfInit);
+
+    Tests::instance().Run();
 
     return 0;
 }

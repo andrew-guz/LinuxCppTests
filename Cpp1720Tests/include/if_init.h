@@ -1,19 +1,31 @@
 #pragma once
 
+#include "test_helper.h"
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
 
-void TestIfInit()
+class IfInit final : public TestBase
 {
-    std::vector v {1,2,3,4};
-    if (auto i = std::find(v.begin(), v.end(), 2); i != v.end())
+public:
+    virtual const char* Name() const override
     {
-        std::cout << "1";
+        return "if initialization";
     }
-    else
+
+protected:
+    virtual void TestImpl() override
     {
-        if (i == v.end())
-            std::cout << "2";
+        std::vector v {1,2,3,4};
+        if (auto i = std::find(v.begin(), v.end(), 2); i != v.end())
+            std::cout << "1" << std::endl;
+        else if (i == v.end())
+            std::cout << "2" << std::endl;
+
+        if (auto i = std::find(v.begin(), v.end(), 5); i != v.end())
+            std::cout << "1" << std::endl;
+        else if (i == v.end())
+            std::cout << "2" << std::endl;
     }
-}
+};
