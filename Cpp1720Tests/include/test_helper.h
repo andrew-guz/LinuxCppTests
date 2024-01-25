@@ -54,4 +54,4 @@ private:
 
 #define REGISTER_TEST(x) Tests::instance().RegisterTest<x>()
 
-#define PRINT(x) std::cout << (x) << std::endl
+#define PRINT(x) std::cout << x << std::endl

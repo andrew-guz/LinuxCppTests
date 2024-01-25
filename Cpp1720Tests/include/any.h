@@ -33,7 +33,7 @@ protected:
         }
         catch(...)
         {
-            PRINT(std::string("No conversion to ") + typeid(T).name());
+            PRINT("No conversion to " << typeid(T).name());
             return {};
         }
     }
