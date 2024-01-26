@@ -39,7 +39,7 @@ public:
     template<typename T>
     void RegisterTest()
     {
-        _tests.emplace_back(std::make_shared<T>());
+        _tests.emplace_back(new T());
     }
 
     void Run()
