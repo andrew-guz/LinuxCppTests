@@ -5,6 +5,7 @@
 #include "any.h"
 #include "async.h"
 #include "aggregate_initialization.h"
+#include "mauby_unused.h"
 
 int main()
 {
@@ -13,6 +14,7 @@ int main()
     REGISTER_TEST(Any);
     REGISTER_TEST(Async);
     REGISTER_TEST(AggregateInitialization);
+    REGISTER_TEST(MaybeUnused);
 
     Tests::instance().Run();
 
