@@ -6,7 +6,7 @@
         {
             "label": "run",
             "type": "process",
-            "command": "./bin/Cpp1720Tests",
+            "command": "./bin/CppStandardTests",
             "group": {
                 "kind": "none",
                 "isDefault": true

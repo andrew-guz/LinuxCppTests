@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 # common variable for project name and executable name
-set(PROJECT_NAME "Cpp1720Tests")
+set(PROJECT_NAME "CppStandardTests")
 
 #build in Debug mode
 set(CMAKE_BUILD_TYPE Debug)
