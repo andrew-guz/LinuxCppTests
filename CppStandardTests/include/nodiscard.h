@@ -2,6 +2,10 @@
 
 #include "test_helper.h"
 
+/*
+Also applicable for enums and classes.
+*/
+
 namespace NodiscardTest
 {
     [[nodiscard]] int checkSomething()
