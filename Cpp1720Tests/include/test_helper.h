@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <cstring>
 
 class TestBase
 {
@@ -42,10 +43,17 @@ public:
         _tests.emplace_back(new T());
     }
 
-    void Run()
+    void RunAll()
     {
         for(auto& test : _tests)
             test->Test();
+    }
+
+    void RunExact(const char* name)
+    {
+        for(auto& test : _tests)
+            if (strcmp(test->Name(), name) == 0)
+                test->Test();
     }
 
 private:

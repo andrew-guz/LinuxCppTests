@@ -7,7 +7,7 @@
 #include "aggregate_initialization.h"
 #include "mauby_unused.h"
 
-int main()
+int main(int argc, char** argv)
 {
     REGISTER_TEST(IfInit);
     REGISTER_TEST(IfConstexpr);
@@ -16,7 +16,10 @@ int main()
     REGISTER_TEST(AggregateInitialization);
     REGISTER_TEST(MaybeUnused);
 
-    Tests::instance().Run();
+    if (argc > 1)
+        Tests::instance().RunExact(argv[1]);
+    else
+        Tests::instance().RunAll();
 
     return 0;
 }
