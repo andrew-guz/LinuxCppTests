@@ -1,0 +1,21 @@
+| Feature | Heard about | Used myself | Example |
+| - | - | - | - |
+| auto, decltype  | + | + | - |
+| default, delete | + | + | - |
+| final, override | + | + | - |
+| move, move ctor, move =, rvalue | +/- | - | - |
+| enum class | + | + | - |
+| constexpr | +/- | +/- | +/- |
+| list initialization | + | + | - |
+| delegating constructors | + | + | - |
+| nullptr | + | + | - |
+| type alias (using) | + | - | - |
+| variadic templates | +/- | +/- | - |
+| user define literals | +/- | +/- | - |
+| attributes | +- | +/- | + |
+| lambda | + | + | - |
+| range for | + | + | + |
+| static_assert | + | - | - |
+
+
+
