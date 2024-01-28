@@ -17,6 +17,7 @@
 | range for | + | + | + |
 | static_assert | + | - | - |
 | array | + | + | + |
+| thread | + | + | + |
 
 
 

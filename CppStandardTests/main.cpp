@@ -9,6 +9,7 @@
 //#include "nodiscard.h"
 #include "user_defined_literals.h"
 #include "array.h"
+#include "threads.h"
 
 int main(int argc, char** argv)
 {
@@ -21,6 +22,7 @@ int main(int argc, char** argv)
     //REGISTER_TEST(Nodiscard);
     REGISTER_TEST(UserDefinedLiterals);
     REGISTER_TEST(Array);
+    REGISTER_TEST(Threads);
 
     if (argc > 1)
         Tests::instance().RunExact(argv[1]);
