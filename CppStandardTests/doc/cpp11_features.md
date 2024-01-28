@@ -25,6 +25,7 @@
 | make_shared | + | + | - |
 | async | + | +/- | + |
 | begin/end | + | - | - |
+| function | + | + | - |
 
 
 
