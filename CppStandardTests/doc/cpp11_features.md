@@ -16,6 +16,8 @@
 | lambda | + | + | - |
 | range for | + | + | + |
 | static_assert | + | - | - |
+| array | + | + | + |
+
 
 
 
