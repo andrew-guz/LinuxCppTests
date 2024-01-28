@@ -11,7 +11,7 @@
 | nullptr | + | + | - |
 | type alias (using) | + | - | - |
 | variadic templates | +/- | +/- | - |
-| user define literals | +/- | +/- | - |
+| user define literals | +/- | +/- | + |
 | attributes | +- | +/- | + |
 | lambda | + | + | - |
 | range for | + | + | + |

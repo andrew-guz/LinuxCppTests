@@ -7,6 +7,7 @@
 #include "aggregate_initialization.h"
 #include "mayby_unused.h"
 #include "nodiscard.h"
+#include "user_defined_literals.h"
 
 int main(int argc, char** argv)
 {
@@ -16,6 +17,8 @@ int main(int argc, char** argv)
     REGISTER_TEST(Async);
     REGISTER_TEST(AggregateInitialization);
     REGISTER_TEST(MaybeUnused);
+    REGISTER_TEST(Nodiscard);
+    REGISTER_TEST(UserDefinedLiterals);
 
     if (argc > 1)
         Tests::instance().RunExact(argv[1]);
