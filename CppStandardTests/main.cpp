@@ -9,7 +9,8 @@
 //#include "nodiscard.h"
 #include "user_defined_literals.h"
 #include "array.h"
-#include "threads.h"
+#include "use_threads.h"
+#include "lambda_capture_init.h"
 
 int main(int argc, char** argv)
 {
@@ -23,6 +24,7 @@ int main(int argc, char** argv)
     REGISTER_TEST(UserDefinedLiterals);
     REGISTER_TEST(Array);
     REGISTER_TEST(Threads);
+    REGISTER_TEST(LambdaCaptureInit);
 
     if (argc > 1)
         Tests::instance().RunExact(argv[1]);
