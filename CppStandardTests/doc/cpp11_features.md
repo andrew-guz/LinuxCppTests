@@ -18,6 +18,13 @@
 | static_assert | + | - | - |
 | array | + | + | + |
 | thread | + | + | + |
+| to_string | + | +/- | - |
+| unique_ptr, shared_ptr, weak_ptr | + | + | - |
+| chrono | + | +/- | - |
+| unordered_set, unordered_multiset, unordered_map, unordered_multimap | + | +/- | - |
+| make_shared | + | + | - |
+| async | + | +/- | + |
+| begin/end | + | - | - |
 
 
 
