@@ -23,7 +23,6 @@ protected:
     virtual void TestImpl() override
     {
         auto lambda = [y = LambdaCaptureInitTest::f(5)]{ return y; };
-        auto lambdaValue = lambda();
-        Print(lambdaValue);
+        Print(lambda());
     }
 };
