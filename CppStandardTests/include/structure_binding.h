@@ -23,9 +23,9 @@ protected:
     virtual void TestImpl() override
     {
         auto [i, j] = GetPair();
-        PRINT(i << ", " << j);
+        Print(i, j);
         auto [b, s, a_ptr] = GetTuple();
-        PRINT(b << ", " << s << ", " << a_ptr->x << ", " << a_ptr->y);
+        Print(b, s, a_ptr->x, a_ptr->y);
     }
 
 private:

@@ -16,7 +16,7 @@ namespace AsyncTest
         for (auto i = 0; i < 10; ++i)
         {
             std::this_thread::sleep_for(100ms);
-            PRINT(i);
+            Print(i);
         }
     }
 
@@ -28,7 +28,7 @@ namespace AsyncTest
             for (auto i = 0u; i < count; ++i)
             {
                 std::this_thread::sleep_for(100ms);
-                PRINT("A::WorkerFunction_" << count << " " << i);
+                Print("A::WorkerFunction_" + std::to_string(count), i);
             }
         }
     };
@@ -46,20 +46,20 @@ protected:
     virtual void TestImpl() override
     {
         auto futureAsync = std::async(std::launch::async, AsyncTest::WorkerFunction);
-        PRINT("Waiting async");
+        Print("Waiting async");
         futureAsync.wait();
-        PRINT("Done async");
+        Print("Done async");
 
         auto futureDeferred = std::async(std::launch::deferred, AsyncTest::WorkerFunction);
-        PRINT("Waiting deffered");
-        PRINT("Done deffered");
+        Print("Waiting deffered");
+        Print("Done deffered");
         //since std::launch::deferred will not be calculated till future.wait
 
         std::async(std::launch::async, []{
             for (auto i = 0; i < 10; ++i)
             {
                 std::this_thread::sleep_for(100ms);
-                PRINT("lambda " << i);
+                Print("lambda " + std::to_string(i));
             }
         }).wait();
         

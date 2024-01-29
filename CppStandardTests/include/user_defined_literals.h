@@ -37,7 +37,7 @@ public:
 protected:
     virtual void TestImpl() override
     {
-        PRINT(50.0_km << " " << 50.0_m << " " << 50.0_cm);
-        PRINT("Hello World!"_strlen);
+        Print(50.0_km, 50.0_m, 50.0_cm);
+        Print("Hello World!"_strlen);
     }
 };

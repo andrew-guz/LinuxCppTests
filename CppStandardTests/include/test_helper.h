@@ -62,4 +62,16 @@ private:
 
 #define REGISTER_TEST(x) Tests::instance().RegisterTest<x>()
 
-#define PRINT(x) std::cout << x << std::endl
+void Print()
+{
+    std::cout << std::endl;
+}
+
+template<typename T, typename ...Types>
+void Print(const T& first, const Types& ...args)
+{
+    std::cout << first;
+    if constexpr (sizeof...(Types) > 0)
+        std::cout << ", ";
+    Print(args...);
+}

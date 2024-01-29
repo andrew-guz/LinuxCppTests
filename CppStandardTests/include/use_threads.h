@@ -10,7 +10,7 @@ namespace ThreadsTest
     {
         for (auto i = 0; i < count; ++i)
         {
-            PRINT(i);
+            Print(i);
             std::this_thread::sleep_for(std::chrono::microseconds(100));
         }
     }
@@ -27,14 +27,14 @@ public:
 protected:
     virtual void TestImpl() override
     {
-        PRINT("starting thread");
+        Print("starting thread");
         std::thread t1(ThreadsTest::Worker1, 5);
         t1.join();
-        PRINT("thread joined");
+        Print("thread joined");
 
-        PRINT("starting thread");
+        Print("starting thread");
         std::thread t2(ThreadsTest::Worker1, 5);
         t2.detach();
-        PRINT("thread detached");
+        Print("thread detached");
     }
 };

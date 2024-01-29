@@ -33,22 +33,22 @@ protected:
     virtual void TestImpl() override
     {
         AggregateInitializationTest::A a1 {};
-        PRINT(a1.i);
+        Print(a1.i);
 
         AggregateInitializationTest::B b1 {};
-        PRINT(b1.i);
-        PRINT(b1.f);
+        Print(b1.i);
+        Print(b1.f);
 
         AggregateInitializationTest::B b2 {{}};
-        PRINT(b2.i);
-        PRINT(b2.f);
+        Print(b2.i);
+        Print(b2.f);
 
         AggregateInitializationTest::B b3 {{}, 10.0f};
-        PRINT(b3.i);
-        PRINT(b3.f);
+        Print(b3.i);
+        Print(b3.f);
 
         AggregateInitializationTest::B b4 {{42}, 12.0f};
-        PRINT(b4.i);
-        PRINT(b4.f);
+        Print(b4.i);
+        Print(b4.f);
     }
 };
