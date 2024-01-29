@@ -5,6 +5,8 @@
 #include <any>
 #include <string>
 
+using namespace std::string_literals;
+
 namespace AnyTest
 {
     class A
@@ -33,8 +35,7 @@ protected:
         }
         catch(...)
         {
-            //wanted to apply ""s but due to headers and chrono s treated as seconds
-            Print(std::string{"No conversion to "} + typeid(T).name());
+            Print("No conversion to "s + typeid(T).name());
             return {};
         }
     }
