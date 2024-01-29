@@ -15,15 +15,15 @@ protected:
     static void print(const T& value)
     {
         if constexpr (std::is_same_v<T, int>)
-            std::cout << "is int" << std::endl;
+            Print("is int");
         else if constexpr (std::is_same_v<T, bool>)
-            std::cout << "is bool" << std::endl;
+            Print("is bool");
         else if constexpr (std::is_same_v<T, char*>)
-            std::cout << "is char*" << std::endl;
+            Print("is char*");
         else if constexpr (std::is_pointer_v<T>)
-            std::cout << "is pointer" << std::endl;
+            Print("is pointer");
         else
-            std::cout << "not supported type" << std::endl;
+            Print("not supported type");
     }
 
     virtual void TestImpl() override

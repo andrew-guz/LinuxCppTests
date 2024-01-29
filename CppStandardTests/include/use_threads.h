@@ -36,5 +36,8 @@ protected:
         std::thread t2(ThreadsTest::Worker1, 5);
         t2.detach();
         Print("thread detached");
+
+        //wait for t2 to be finished cause it will harm output of next Tests
+        std::this_thread::sleep_for(1s);
     }
 };

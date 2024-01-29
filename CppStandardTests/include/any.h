@@ -65,6 +65,6 @@ protected:
         AnyTest::A a_obj;
         std::any a3 {a_obj};
         Print(a3.has_value());
-        auto a_obj2 = std::any_cast<AnyTest::A>(a3);
+        [[maybe_unused]] auto a_obj2 = std::any_cast<AnyTest::A>(a3);
     }
 };

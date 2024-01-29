@@ -19,13 +19,13 @@ protected:
     {
         std::vector v {1,2,3,4};
         if (auto i = std::find(v.begin(), v.end(), 2); i != v.end())
-            std::cout << "1" << std::endl;
+            Print("2 found");
         else if (i == v.end())
-            std::cout << "2" << std::endl;
+            Print("2 not found");
 
         if (auto i = std::find(v.begin(), v.end(), 5); i != v.end())
-            std::cout << "1" << std::endl;
+            Print("5 found");
         else if (i == v.end())
-            std::cout << "2" << std::endl;
+            Print ("5 not found");
     }
 };
