@@ -6,3 +6,5 @@
 | [[nodiscard]], [[maybe_unused]] | + | + | + |
 | __has_include | + | - | - |
 | std::variant | + | + | + |
+| std::any | + | +/- | + |
+| std::optional | + | + | + |

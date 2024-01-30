@@ -58,6 +58,7 @@
         "chrono": "cpp",
         "sstream": "cpp",
         "cstring": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "optional": "cpp"
     }
 }
