@@ -12,7 +12,6 @@
 | type alias (using) | + | - | - |
 | variadic templates | +/- | +/- | - |
 | user define literals | +/- | +/- | + |
-| attributes | +- | +/- | + |
 | lambda | + | + | - |
 | range for | + | + | + |
 | static_assert | + | - | - |
