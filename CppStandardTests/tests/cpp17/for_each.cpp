@@ -38,7 +38,7 @@ TEST_CASE("Sequential")
 TEST_CASE("Parallel")
 {
     auto v = CreateVector(1000);
-    std::for_each(v.begin(), v.end(), UpdateElement);
+    std::for_each(std::execution::par, v.begin(), v.end(), UpdateElement);
     for (auto i = 0; i < 5; ++i)
         REQUIRE(v[i]._i == i + 3);
 }
