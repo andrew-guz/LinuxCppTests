@@ -38,7 +38,7 @@ add_executable(${PROJECT_NAME} main.cpp ${SRC_FILES})
 #unit tests section
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/tests)
 
-file(GLOB TEST_SOURCES tests/*.cpp)
+file(GLOB_RECURSE TEST_SOURCES tests/*.cpp)
 foreach(TEST_TARGET ${TEST_SOURCES})
     get_filename_component(EXECUTABLE_NAME ${TEST_TARGET} NAME_WE)
     add_executable(${EXECUTABLE_NAME} ${TEST_TARGET})
