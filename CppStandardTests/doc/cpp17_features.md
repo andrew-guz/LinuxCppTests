@@ -11,3 +11,4 @@
 | invoke | + | - | - |
 | filesystem | + | + | - |
 | parallel algorithms | + | - | - |
+| for_each | + | + | + |
