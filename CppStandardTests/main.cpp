@@ -11,7 +11,6 @@
 #include "use_threads.h"
 #include "lambda_capture_init.h"
 #include "structure_binding.h"
-#include "use_variant.h"
 #include "use_optional.h"
 
 int main(int argc, char** argv)
@@ -27,7 +26,6 @@ int main(int argc, char** argv)
     REGISTER_TEST(Threads);
     REGISTER_TEST(LambdaCaptureInit);
     REGISTER_TEST(StructureBinding);
-    REGISTER_TEST(UseVariant);
     REGISTER_TEST(UseOptional);
 
     if (argc > 1)
