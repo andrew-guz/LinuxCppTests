@@ -4,19 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "run",
-            "type": "process",
-            "command": "./bin/CppStandardTests",
-            "group": {
-                "kind": "none",
-                "isDefault": true
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "build",
             "type": "shell",
-            "command": "cmake . && make -j10 ",
+            "command": "cmake . && make -j10 && make test",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
