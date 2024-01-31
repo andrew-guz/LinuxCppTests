@@ -57,6 +57,8 @@ Array chunks combined in a list
 
 ## set
 
+Red Black Tree (self-balancing tree)
+
 | Operation | Complexity |
 | - | - |
 | insert | O(log n) |
@@ -68,6 +70,8 @@ Array chunks combined in a list
 
 
 ## unordered set
+
+Hash table
 
 | Operation | Complexity |
 | - | - |
@@ -81,6 +85,8 @@ Array chunks combined in a list
 
 ## map
 
+Red Black Tree (self-balancing tree)
+
 | Operation | Complexity |
 | - | - |
 | insert | O(log n) |
@@ -92,6 +98,8 @@ Array chunks combined in a list
 
 
 ## unordered map
+
+Hash table
 
 | Operation | Complexity |
 | - | - |
