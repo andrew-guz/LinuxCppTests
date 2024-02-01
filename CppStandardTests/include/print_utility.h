@@ -11,7 +11,7 @@ template<typename T, typename ...Types>
 void Print(const T& first, const Types& ...args)
 {
     std::cout << first;
-    if constexpr (sizeof...(Types) > 0)
+    if constexpr (sizeof...(args) > 0)
         std::cout << ", ";
     Print(args...);
 }
