@@ -24,7 +24,7 @@ namespace AggregateInitializationTest
 class AggregateInitialization : public TestBase
 {
 public:
-    virtual const char* Name() const
+    virtual const char* Name() const override
     {
         return "aggregate initialization";
     }

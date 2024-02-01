@@ -19,7 +19,7 @@ namespace ThreadsTest
 class Threads : public TestBase
 {
 public:
-    virtual const char* Name() const
+    virtual const char* Name() const override
     {
         return "threads";
     }

@@ -29,7 +29,7 @@ size_t operator"" _strlen(const char* str, size_t length)
 class UserDefinedLiterals : public TestBase
 {
 public:
-    virtual const char* Name() const
+    virtual const char* Name() const override
     {
         return "user defined literals";
     }

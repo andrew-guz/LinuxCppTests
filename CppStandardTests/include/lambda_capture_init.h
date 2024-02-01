@@ -14,7 +14,7 @@ namespace LambdaCaptureInitTest
 class LambdaCaptureInit : public TestBase
 {
 public:
-    virtual const char* Name() const
+    virtual const char* Name() const override
     {
         return "lambda capture init";
     }

@@ -28,7 +28,7 @@ namespace NodiscardTest
 class Nodiscard : public TestBase
 {
 public:
-    virtual const char* Name() const
+    virtual const char* Name() const override
     {
         return "nodiscard";
     }
