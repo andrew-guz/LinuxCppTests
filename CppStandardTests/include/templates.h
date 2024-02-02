@@ -4,6 +4,7 @@
 
 #include "templates/print.h"
 #include "templates/specialization.h"
+#include "templates/using.h"
 
 class Templates : public TestBase
 {
@@ -36,5 +37,8 @@ protected:
         //example of template class deduction
         SpecialPrintTemplateClass sptc1(1);
         sptc1.SpecialPrint();
+
+        [[maybe_unused]] CharArray<5> charArray1 = { 'a', 'b', 'c', 'd', 0 };
+        Print(charArray1.data());
     }
 };
