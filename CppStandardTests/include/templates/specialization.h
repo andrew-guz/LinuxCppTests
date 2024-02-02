@@ -34,11 +34,25 @@ void SpecialPrintClassWithTemplateFunction::SpecialPrint(const std::string& valu
 template<typename T>
 class SpecialPrintTemplateClass
 {
-public:    
+public:
+    SpecialPrintTemplateClass(const T& value) :
+        _value(value)
+    {
+
+    }
+
+    void SpecialPrint()
+    {
+        SpecialPrint(_value);
+    }
+
     static void SpecialPrint(const T& value)
     {
         std::cout << value << std::endl;
-    }   
+    }
+
+private:
+    T _value;
 };
 
 template<>

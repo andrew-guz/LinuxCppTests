@@ -32,5 +32,9 @@ protected:
         SpecialPrintTemplateClass<bool>::SpecialPrint(true);
         SpecialPrintTemplateClass<const char*>::SpecialPrint("hello");
         SpecialPrintTemplateClass<std::string>::SpecialPrint(std::string{"hello"});
+
+        //example of template class deduction
+        SpecialPrintTemplateClass sptc1(1);
+        sptc1.SpecialPrint();
     }
 };
