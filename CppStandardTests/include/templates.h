@@ -22,5 +22,15 @@ protected:
         SpecialPrint(true);
         SpecialPrint("hello");
         SpecialPrint(std::string{"hello"});
+
+        SpecialPrintClassWithTemplateFunction::SpecialPrint(1);
+        SpecialPrintClassWithTemplateFunction::SpecialPrint(true);
+        SpecialPrintClassWithTemplateFunction::SpecialPrint("hello");
+        SpecialPrintClassWithTemplateFunction::SpecialPrint(std::string{"hello"});
+
+        SpecialPrintTemplateClass<int>::SpecialPrint(1);
+        SpecialPrintTemplateClass<bool>::SpecialPrint(true);
+        SpecialPrintTemplateClass<const char*>::SpecialPrint("hello");
+        SpecialPrintTemplateClass<std::string>::SpecialPrint(std::string{"hello"});
     }
 };
