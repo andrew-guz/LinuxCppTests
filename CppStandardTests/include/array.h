@@ -19,5 +19,14 @@ protected:
         for (const auto& i : arr1)
             Print(i);
         Print(arr1[3]);
+
+        std::array<int, 3> arr2;
+        Print(arr2[0]);
+        Print(arr2[1]);
+
+        //check how cool array initialized by 0 by default if it's partially initalized:)
+        std::array<int, 3> arr3 { 1 };
+        Print(arr3[0]);
+        Print(arr3[1]);
     }
 };

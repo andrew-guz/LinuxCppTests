@@ -40,5 +40,9 @@ protected:
 
         [[maybe_unused]] CharArray<5> charArray1 = { 'a', 'b', 'c', 'd', 0 };
         Print(charArray1.data());
+
+        //check how cool array initialized by 0 by default :)
+        [[maybe_unused]] CharArray<5> charArray2 = { 'a', 'b', 'c', 'd' };
+        Print(charArray2.data());
     }
 };
