@@ -5,6 +5,7 @@
 #include "templates/variadic.h"
 #include "templates/specialization.h"
 #include "templates/using.h"
+#include "templates/folding.h"
 
 class Templates : public TestBase
 {
@@ -44,5 +45,8 @@ protected:
         //check how cool array initialized by 0 by default :)
         [[maybe_unused]] CharArray<5> charArray2 = { 'a', 'b', 'c', 'd' };
         Print(charArray2.data());
+
+        auto sum1 = Sum(1, 2, 3);
+        PrintInOneLine("1+2+3=", sum1);
     }
 };

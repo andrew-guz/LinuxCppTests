@@ -13,3 +13,4 @@
 | parallel algorithms | + | - | - |
 | for_each | + | + | + |
 | template class type deduction | + | - | + |
+| folding for variadic templates | + | - | + |

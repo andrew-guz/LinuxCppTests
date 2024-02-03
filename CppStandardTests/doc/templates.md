@@ -11,6 +11,7 @@ Check this: https://cppinsights.io/
 
 ### cpp17
 - class template argument deduction
+- folding operations for variadic templates
 
 
 ### cpp20
