@@ -2,7 +2,7 @@
 
 #include "test_helper.h"
 
-#include "templates/print.h"
+#include "templates/variadic.h"
 #include "templates/specialization.h"
 #include "templates/using.h"
 

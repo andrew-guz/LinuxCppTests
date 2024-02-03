@@ -1,6 +1,6 @@
 #pragma once
 
-#include "templates/print.h"
+#include "templates/variadic.h"
 
 #include <vector>
 #include <memory>
