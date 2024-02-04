@@ -8,6 +8,9 @@
 #include "templates/folding.h"
 #include "templates/sfinae_vs_if_constexpr.h"
 
+#include <string>
+using namespace std::string_literals;
+
 class Templates : public TestBase
 {
 public:
@@ -52,11 +55,14 @@ protected:
 
         PrintWithSpaces(1, 2.0, "hello");
 
-        SFINAEFunc("hello");
-        SFINAEFunc(1);
-        SFINAEFunc(0.6);
+        SFINAEFunc1("hello"s);
+        SFINAEFunc1(1);
+        SFINAEFunc1(0.6);
+        SFINAEFunc2("hello"s);
+        SFINAEFunc2(1);
+        SFINAEFunc2(0.6);
 
-        IfConstexprFunc("hello");
+        IfConstexprFunc("hello"s);
         IfConstexprFunc(1);
         IfConstexprFunc(0.6);
     }
