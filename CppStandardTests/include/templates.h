@@ -6,6 +6,7 @@
 #include "templates/specialization.h"
 #include "templates/using.h"
 #include "templates/folding.h"
+#include "templates/sfinae_vs_if_constexpr.h"
 
 class Templates : public TestBase
 {
@@ -48,5 +49,13 @@ protected:
 
         auto sum1 = Sum(1, 2, 3);
         PrintInOneLine("1+2+3=", sum1);
+
+        SFINAEFunc("hello");
+        SFINAEFunc(1);
+        SFINAEFunc(0.6);
+
+        IfConstexprFunc("hello");
+        IfConstexprFunc(1);
+        IfConstexprFunc(0.6);
     }
 };
