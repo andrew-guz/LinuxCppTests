@@ -50,6 +50,8 @@ protected:
         auto sum1 = Sum(1, 2, 3);
         PrintInOneLine("1+2+3=", sum1);
 
+        PrintWithSpaces(1, 2.0, "hello");
+
         SFINAEFunc("hello");
         SFINAEFunc(1);
         SFINAEFunc(0.6);

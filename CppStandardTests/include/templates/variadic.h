@@ -15,12 +15,3 @@ void Print(const T& first, const Types& ...args)
         std::cout << ", ";
     Print(args...);
 }
-
-template<typename T, typename ...Types>
-void PrintInOneLine(const T& first, const Types& ...args)
-{
-    std::cout << first;
-    if constexpr (sizeof...(args) > 0)    
-        PrintInOneLine(args...);
-    std::cout << std::endl;
-}
