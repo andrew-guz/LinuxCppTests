@@ -32,6 +32,7 @@ std::enable_if_t<std::is_same_v<T, std::string>> SFINAEFunc2(const T& value)
     std::cout << "String" << std::endl;
 }
 
+//the less preferred function during compiler searching 
 void SFINAEFunc2(...)
 {
     std::cout << "Unknown" << std::endl;
