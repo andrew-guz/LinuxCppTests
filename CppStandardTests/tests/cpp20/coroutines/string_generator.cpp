@@ -74,7 +74,7 @@ TEST_CASE("Coroutine example 1")
 
     REQUIRE(coroutine1.getNextString() == "test string 1"s);
     REQUIRE(coroutine1.getNextString() == "test string 2"s);
-    //REQUIRE(coroutine1.getNextString() == "test string 3"s);
+    REQUIRE(coroutine1.getNextString() == "test string 3"s);
 
     StringGenerator coroutine2 = GenerateStrings();
     while(!coroutine2.isDone())
