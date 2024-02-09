@@ -57,9 +57,9 @@ struct Fibonacci
         //process co_yield value (pass back to caller) and suspend after that
         std::suspend_always yield_value(int v) noexcept
         {
-            Print("yield_value", v);
+            Print("co_yield", v);
             value = v;
-            return {}; 
+            return {};
         }
         //process co_return  value (pass back to caller) and suspend after that
         //can have either co_return XXX; or no co_return (see return_void)
@@ -84,28 +84,35 @@ struct Fibonacci
         //can be std::coroutine_handle<> (points on any coroutine) or std::coroutine_handle<promise_type> (exact that type of coroutine)
         void await_suspend(std::coroutine_handle<Promise> h) noexcept 
         {
+            Print("co_await", value);
             //store it for later
             c_handle = h;
+            //and pass value to promise
+            c_handle.promise().value = value;
         }
         //will be called right before coroutine resumed
         //using stored handler we can get some data from promise
         void await_resume() noexcept {}
 
+        int value;
         std::coroutine_handle<Promise> c_handle;
+
+        Awaitable(int i) :
+            value(i)
+        {
+            
+        }
     };
 
     std::coroutine_handle<Promise> c_handle;
 
     void resume()
     {
-        if (!c_handle.done())
-            c_handle.resume();
+        c_handle.resume();
     }
 
     int getValue()
     {
-        if (c_handle.done())
-        return -1;
         return c_handle.promise().value;
     }
 };
@@ -115,11 +122,16 @@ Fibonacci FibonacciFunction()
     Print("Coroutine started");
     int i1 = 1;
     int i2 = 1;
+    bool return_via_yield = false;
     while(true)
     {
-        Print("Coroutine about to yield");
-        co_yield i1;
-        Print("Coroutine after yield");
+        Print("Coroutine about to send data to outta world and pause");
+        if (return_via_yield)
+            co_yield i1;
+        else
+            co_await Fibonacci::Awaitable(i1);            
+        Print("Coroutine unpaused");
+        return_via_yield = !return_via_yield;
         i1 = std::exchange(i2, i1 + i2);
     }
     Print("Coroutine finished");
