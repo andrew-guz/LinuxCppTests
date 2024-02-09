@@ -1,0 +1,1 @@
+- Write future promise example with long operation and kind of waiting window
