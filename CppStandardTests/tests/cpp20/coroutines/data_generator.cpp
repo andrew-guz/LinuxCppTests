@@ -7,14 +7,14 @@
 
 using namespace std::string_literals;
 
-struct DataGenarator
+struct DataGenerator
 {
     struct promise_type
     {
         std::variant<std::string, int> data;
 
         void unhandled_exception() {}
-        DataGenarator get_return_object() { return DataGenarator(this); }
+        DataGenerator get_return_object() { return DataGenerator(this); }
         std::suspend_always initial_suspend() noexcept { return {}; }
         std::suspend_always final_suspend() noexcept { return {}; }
         std::suspend_always yield_value(const std::string msg) noexcept
@@ -39,19 +39,19 @@ struct DataGenarator
 
     std::coroutine_handle<promise_type> coroutine_handler;
 
-    explicit DataGenarator(promise_type* p) :
+    explicit DataGenerator(promise_type* p) :
         coroutine_handler(std::coroutine_handle<promise_type>::from_promise(*p))
     {
         
     }
 
-    DataGenarator(DataGenarator&& other) :
+    DataGenerator(DataGenerator&& other) :
         coroutine_handler(std::exchange(other.coroutine_handler, nullptr))
     {
         
     }
 
-    ~DataGenarator()
+    ~DataGenerator()
     {
         if (coroutine_handler)
             coroutine_handler.destroy();
@@ -70,7 +70,7 @@ struct DataGenarator
     }
 };
 
-DataGenarator GenerateData()
+DataGenerator GenerateData()
 {
     co_yield "test string 1"s;
     co_yield 4;
@@ -87,13 +87,13 @@ void print(const std::variant<std::string, int>& var)
         std::cout << std::get<int>(var) << std::endl;
 }
 
-TEST_CASE("Coroutine example 1")
+TEST_CASE("Data generator example")
 {
-    DataGenarator coroutine1 = GenerateData();
+    DataGenerator coroutine1 = GenerateData();
     while(!coroutine1.isDone())
         print(coroutine1.getNextData());
 
-    DataGenarator coroutine2 = GenerateData();
+    DataGenerator coroutine2 = GenerateData();
     REQUIRE(std::get<std::string>(coroutine2.getNextData()) == "test string 1"s);
     REQUIRE(std::get<int>(coroutine2.getNextData()) == 4);
     REQUIRE(std::get<std::string>(coroutine2.getNextData()) == "test string 2"s);
