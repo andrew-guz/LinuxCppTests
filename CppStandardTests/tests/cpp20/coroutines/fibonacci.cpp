@@ -29,7 +29,10 @@ later Awaiter can pass this data to Promise in await_suspend
 from caller we have Fibonacci, from it's c_handle we can get promise and get that value
 
 To coroutine:
-Fibonacci -> c_handle -> promise
+Fibonacci -> c_handle -> promise -> resume -> Awaiter -> XXX await_resume() { return promise().XXX; }
+
+instead of returning void in await_suspend you can return another coroutine handler to resume another coroutine instead of returning back to caller
+after that you will return to original coroutine
 */
 
 //coroutine handler
@@ -82,6 +85,7 @@ struct Fibonacci
         bool await_ready() noexcept { return false; }
         //will be executed right befor function will goes to suspension
         //can be std::coroutine_handle<> (points on any coroutine) or std::coroutine_handle<promise_type> (exact that type of coroutine)
+        //instead of returning void you can return another coroutine handler to resume another coroutine instead of returning back to caller
         void await_suspend(std::coroutine_handle<Promise> h) noexcept 
         {
             Print("co_await", value);
@@ -92,6 +96,7 @@ struct Fibonacci
         }
         //will be called right before coroutine resumed
         //using stored handler we can get some data from promise
+        //will not be called if there were no suspend (await_ready return true)
         void await_resume() noexcept {}
 
         int value;
