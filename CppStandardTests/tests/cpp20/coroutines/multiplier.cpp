@@ -60,18 +60,28 @@ struct Multiplier
 
 Multiplier Multiply()
 {
-    int a = co_await Multiplier::Awaiter();
-    int b = co_await Multiplier::Awaiter();
-    co_yield (a*b);
+    while(true)
+    {
+        int a = co_await Multiplier::Awaiter();
+        int b = co_await Multiplier::Awaiter();
+        co_yield (a*b);
+    }
+}
+
+int DoTheMultiply(Multiplier& multiplier, int a, int b)
+{
+    multiplier.resume();
+    multiplier.sendMultiplier(a);
+    multiplier.resume();
+    multiplier.sendMultiplier(b);
+    multiplier.resume();
+    return multiplier.getResult();
 }
 
 TEST_CASE("Multiplier example")
 {
     Multiplier multiplier = Multiply();
-    multiplier.resume();
-    multiplier.sendMultiplier(2);
-    multiplier.resume();
-    multiplier.sendMultiplier(3);
-    multiplier.resume();
-    REQUIRE(multiplier.getResult() == 6);
+    REQUIRE(DoTheMultiply(multiplier, 2, 3) == 6);
+    REQUIRE(DoTheMultiply(multiplier, 7, 4) == 28);
+    REQUIRE(DoTheMultiply(multiplier, 1, 99) == 99);
 }
