@@ -1,6 +1,8 @@
 #include "../catch.hpp"
 
 #include <variant>
+#include <numbers>
+#include <vector>
 
 using namespace std::string_literals;
 
@@ -46,4 +48,70 @@ TEST_CASE("Visit")
     REQUIRE(std::visit(visitFunction, v) == "int");
     v = true;
     REQUIRE(std::visit(visitFunction, v) == "bool");
+}
+
+enum class ShapeType
+{
+    Circle,
+    Square
+};
+
+struct Shape
+{
+    virtual ShapeType type() const = 0;
+
+    virtual double perimeter() const = 0;
+};
+
+struct Circle : public Shape
+{
+    double _radius;
+
+    Circle(double r) :
+        _radius(r)
+    {
+
+    }
+
+    virtual ShapeType type() const override { return ShapeType::Circle; }
+
+    virtual double perimeter() const override { return 2.0 * std::numbers::pi * _radius; }
+};
+
+struct Square : public Shape
+{
+    double _side;
+
+    Square(double s) :
+        _side(s)
+    {
+
+    }
+
+    virtual ShapeType type() const override { return ShapeType::Square; }
+
+    virtual double perimeter() const override { return 4.0 * _side; }
+};
+
+TEST_CASE("Variant for polymorphism")
+{
+    std::vector<std::variant<Circle, Square>> figures;
+    figures.emplace_back(Circle(5));
+    figures.emplace_back(Square(5));
+    for (const auto& figure : figures)
+        std::visit([](const auto& f)
+        {
+            auto p = f.perimeter();
+            double expected_p = 0.0;
+            switch(f.type())
+            {
+                case ShapeType::Circle:
+                    expected_p = 2.0 * std::numbers::pi * 5.0;
+                    break;
+                case ShapeType::Square:
+                    expected_p = 4.0 * 5.0;
+                    break;
+            }
+            REQUIRE(p == expected_p);
+        }, figure);
 }
