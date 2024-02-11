@@ -4,7 +4,7 @@
 | ranges | +/- | - | + |
 | coroutines | - | - | - |
 | concepts | - | - | - |
-| jthread | - | - | - |
+| jthread | + | - | + |
 | semaphore | - | - | - |
 | spaceship operator (tree-way comparision) <=> | +/- | - | - |
 | ranged based for variable initialization | - | - | - |
