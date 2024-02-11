@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 template<typename T, typename ...Types>
 auto Sum(const T& first, const Types& ... args)
 {
