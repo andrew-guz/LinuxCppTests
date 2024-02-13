@@ -1,3 +1,9 @@
+## Main ideas
+
+- do less copy and new memory allocations
+- use threads
+- constexpr can speedup your code
+
 ## 2D array
 
 Stored in memory linearly (row by row) so better visit all cells by columns and than by rows. This will be 30 times faster.
