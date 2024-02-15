@@ -7,6 +7,11 @@
 #include <chrono>
 #include <functional>
 
+/*
+Interesting moment. If future is not saved anywhere from async,
+in it's dtor it will wait for async to be finished.
+*/
+
 using namespace std::literals::chrono_literals;
 
 namespace AsyncTest
