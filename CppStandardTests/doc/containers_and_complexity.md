@@ -22,6 +22,7 @@ Based on array with additional size so will not relocate always.
 | add | O(1) |
 | insert | O(n) |
 | get | O(1) |
+| find | O(n) |
 | remove | O(n) |
 | size | O(1) |
 | clear | O(n) |

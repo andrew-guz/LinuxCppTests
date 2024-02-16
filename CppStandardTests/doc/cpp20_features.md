@@ -2,7 +2,7 @@
 | - | - | - | - |
 | modules | - | - | - |
 | ranges | +/- | - | + |
-| coroutines | - | - | - |
+| coroutines | +/- | - | + |
 | concepts | - | - | - |
 | jthread | + | - | + |
 | semaphore | - | - | - |
@@ -10,4 +10,4 @@
 | ranged based for variable initialization | - | - | - |
 | format() | - | - | - |
 | source_location | - | - | - |
-| [[nodiscard("reason")]] | - | - | - |
+| [[nodiscard("reason")]] | + | - | - |
