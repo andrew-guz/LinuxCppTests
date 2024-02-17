@@ -47,3 +47,60 @@ TEST_CASE("Notify and start several threads thread")
     PrintWithSpaces("Send notification");
     c.notify_all();
 }
+
+struct Context
+{
+    int data;
+    std::mutex mutex;
+    std::condition_variable wait_for_result;
+    std::condition_variable result_ready;
+    bool finish;
+};
+
+void WorkerThread2(std::latch& thread_started, Context& context)
+{
+    std::unique_lock ul{context.mutex};
+    thread_started.count_down();
+    while(true)
+    {
+        context.wait_for_result.wait(ul);
+        if (context.finish)
+            break;
+        context.data *= context.data;
+        context.result_ready.notify_one();
+    }
+}
+
+TEST_CASE("Several thread communications")
+{
+    std::latch l{1};
+    Context c{5};
+    std::jthread t(WorkerThread2, std::ref(l), std::ref(c));
+    l.wait();
+
+    std::unique_lock ul{c.mutex};
+
+    {
+        c.data = 5;
+        c.wait_for_result.notify_one();
+        c.result_ready.wait(ul);
+        REQUIRE(c.data == 25);
+    }
+
+    {
+        c.data = 6;
+        c.wait_for_result.notify_one();
+        c.result_ready.wait(ul);
+        REQUIRE(c.data == 36);
+    }
+
+    {
+        c.data = 7;
+        c.wait_for_result.notify_one();
+        c.result_ready.wait(ul);
+        REQUIRE(c.data == 49);
+    }
+    
+    c.finish = true;
+    c.wait_for_result.notify_one();
+}
