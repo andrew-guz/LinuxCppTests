@@ -14,10 +14,10 @@ using namespace std::chrono_literals;
 
 void WorkerThread1(std::latch& started, std::mutex& m, std::condition_variable& c, const std::string& name)
 {
-    started.count_down();
     PrintWithSpaces(name, ": started");
     std::unique_lock ul(m);
     PrintWithSpaces(name, ": mutex locked, will wait for notification");
+    started.count_down();
     c.wait(ul);
     std::this_thread::sleep_for(20ms);
     PrintWithSpaces(name, ": finished");
