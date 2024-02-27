@@ -47,4 +47,4 @@ CMakeCache.txt
 #qml staff
 .qtc_clangd/
 *.cmake
-CppStandardTests/Testing/Temporary/CTestCostData.txt
+**/Testing/Temporary/CTestCostData.txt
