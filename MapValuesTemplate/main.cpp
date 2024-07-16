@@ -78,26 +78,51 @@ auto getValues(const ContainerType &container, ConverterType converter) {
 }
 
 int main() {
-  std::map<int, int> myMap{
-      {1, 1},
-      {2, 2},
-  };
+  {
+    std::map<int, int> myMap{
+        {1, 1},
+        {2, 2},
+    };
 
-  const std::vector<int> test1 = getValues(
-      myMap, [](const auto &key) { return key > 1; },
-      [](const auto &value) { return value * 2; });
+    const std::vector<int> test1 = getValues(
+        myMap, [](const auto &key) { return key > 1; },
+        [](const auto &value) { return value * 2; });
 
-  const std::vector<int> test2 =
-      getValues(myMap, [](const auto &key) { return key > 1; });
+    const std::vector<int> test2 = getValues(myMap);
 
-  const std::vector<int> test3 = getValues(myMap);
+    const std::vector<int> test3 =
+        getValues(myMap, [](const auto &key) { return key > 1; });
 
-  const std::vector<std::string> test4 = getValues(
-      myMap, [](const auto &key) { return key > 1; },
-      [](const auto &value) { return std::to_string(value); });
+    const std::vector<std::string> test4 = getValues(
+        myMap, [](const auto &value) { return std::to_string(value); });
 
-  const std::vector<std::string> test5 =
-      getValues(myMap, [](const auto &value) { return std::to_string(value); });
+    const std::vector<std::string> test5 = getValues(
+        myMap, [](const auto &key) { return key > 1; },
+        [](const auto &value) { return std::to_string(value); });
+  }
+
+  {
+    std::unordered_map<int, int> myMap{
+        {1, 1},
+        {2, 2},
+    };
+
+    const std::vector<int> test1 = getValues(
+        myMap, [](const auto &key) { return key > 1; },
+        [](const auto &value) { return value * 2; });
+
+    const std::vector<int> test2 = getValues(myMap);
+
+    const std::vector<int> test3 =
+        getValues(myMap, [](const auto &key) { return key > 1; });
+
+    const std::vector<std::string> test4 = getValues(
+        myMap, [](const auto &value) { return std::to_string(value); });
+
+    const std::vector<std::string> test5 = getValues(
+        myMap, [](const auto &key) { return key > 1; },
+        [](const auto &value) { return std::to_string(value); });
+  }
 
   return 0;
 }
