@@ -4,7 +4,18 @@
 #include <unordered_map>
 #include <vector>
 
+template <typename ContainerType>
+concept is_dictionary = requires(ContainerType) {
+  std::is_same_v<ContainerType,
+                 std::map<typename ContainerType::key_type,
+                          typename ContainerType::mapped_type>> ||
+      std::is_same_v<ContainerType,
+                     std::unordered_map<typename ContainerType::key_type,
+                                        typename ContainerType::mapped_type>>;
+};
+
 template <typename ContainerType, typename ConverterType>
+  requires is_dictionary<ContainerType>
 struct output_type_helper {
   using type =
       typename std::invoke_result_t<ConverterType,
@@ -12,12 +23,14 @@ struct output_type_helper {
 };
 
 template <typename ContainerType>
+  requires is_dictionary<ContainerType>
 struct output_type_helper<ContainerType, void *> {
   using type = typename ContainerType::mapped_type;
 };
 
 template <typename ContainerType, typename FilterType = void *,
           typename ConverterType = void *>
+  requires is_dictionary<ContainerType>
 auto getValues(const ContainerType &container, FilterType filter = nullptr,
                ConverterType converter = nullptr) {
   std::vector<typename output_type_helper<ContainerType, ConverterType>::type>
@@ -44,15 +57,16 @@ int main() {
       {2, 2},
   };
 
-  const auto test1 = getValues(
+  const std::vector<int> test1 = getValues(
       myMap, [](const auto &key) { return key > 1; },
       [](const auto &value) { return value * 2; });
 
-  const auto test2 = getValues(myMap, [](const auto &key) { return key > 1; });
+  const std::vector<int> test2 =
+      getValues(myMap, [](const auto &key) { return key > 1; });
 
-  const auto test3 = getValues(myMap);
+  const std::vector<int> test3 = getValues(myMap);
 
-  const auto test4 = getValues(
+  const std::vector<std::string> test4 = getValues(
       myMap, [](const auto &key) { return key > 1; },
       [](const auto &value) { return std::to_string(value); });
 
