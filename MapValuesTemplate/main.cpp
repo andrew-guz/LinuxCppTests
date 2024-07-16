@@ -28,27 +28,53 @@ struct output_type_helper<ContainerType, void *> {
   using type = typename ContainerType::mapped_type;
 };
 
-template <typename ContainerType, typename FilterType = void *,
-          typename ConverterType = void *>
+template <typename ContainerType>
   requires is_dictionary<ContainerType>
-auto getValues(const ContainerType &container, FilterType filter = nullptr,
-               ConverterType converter = nullptr) {
+const auto DefaultFilter =
+    [](const typename ContainerType::key_type &) { return true; };
+
+template <typename ContainerType>
+  requires is_dictionary<ContainerType>
+const auto DefaultConverter =
+    [](const typename ContainerType::mapped_type &value) { return value; };
+
+template <typename ContainerType,
+          typename FilterType = decltype(DefaultFilter<ContainerType>),
+          typename ConverterType = decltype(DefaultConverter<ContainerType>)>
+  requires is_dictionary<ContainerType>
+auto getValues(const ContainerType &container, FilterType filter,
+               ConverterType converter) {
   std::vector<typename output_type_helper<ContainerType, ConverterType>::type>
       result;
   result.reserve(container.size());
   for (const auto &pair : container) {
-    if constexpr (!std::is_same_v<FilterType, void *>) {
-      if (!filter(pair.first)) {
-        continue;
-      }
-    }
-    if constexpr (!std::is_same_v<ConverterType, void *>) {
+    if (filter(pair.first)) {
       result.push_back(converter(pair.second));
-    } else {
-      result.push_back(pair.second);
     }
   }
   return result;
+}
+
+template <typename ContainerType>
+  requires is_dictionary<ContainerType>
+auto getValues(const ContainerType &container) {
+  return getValues(container, DefaultFilter<ContainerType>,
+                   DefaultConverter<ContainerType>);
+}
+
+template <typename ContainerType, typename FilterType>
+  requires is_dictionary<ContainerType> &&
+           std::is_same_v<std::invoke_result_t<
+                              FilterType, typename ContainerType::key_type>,
+                          bool>
+auto getValues(const ContainerType &container, FilterType filter) {
+  return getValues(container, filter, DefaultConverter<ContainerType>);
+}
+
+template <typename ContainerType, typename ConverterType>
+  requires is_dictionary<ContainerType>
+auto getValues(const ContainerType &container, ConverterType converter) {
+  return getValues(container, DefaultFilter<ContainerType>, converter);
 }
 
 int main() {
@@ -69,6 +95,9 @@ int main() {
   const std::vector<std::string> test4 = getValues(
       myMap, [](const auto &key) { return key > 1; },
       [](const auto &value) { return std::to_string(value); });
+
+  const std::vector<std::string> test5 =
+      getValues(myMap, [](const auto &value) { return std::to_string(value); });
 
   return 0;
 }
